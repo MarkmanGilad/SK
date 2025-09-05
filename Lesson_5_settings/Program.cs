@@ -31,8 +31,6 @@ history.AddSystemMessage("You are an assistant that give a one sentence answer w
 var settings = new OpenAIPromptExecutionSettings {
     Temperature = 2,// creative max = 2
     MaxTokens = 100,
-
-
 };
 
 while (true)
@@ -51,6 +49,5 @@ while (true)
 
     Console.WriteLine(result.Content);
     history.AddAssistantMessage(result.Content);
-    
 }
 

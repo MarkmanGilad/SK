@@ -1,0 +1,104 @@
+﻿@page
+@model Lesson_11_Razor_Pages.Pages.Image_GenModel
+@{
+    ViewData["Title"] = "Image Generator";
+}
+
+<div class="row justify-content-center mt-5">
+    <div class="col-md-8">
+        <div class="card shadow">
+            <div class="card-header bg-success text-white">
+                <h5 class="mb-0">🎨 AI Image Generator</h5>
+            </div>
+            <div class="card-body">
+                @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+                {
+                    <div class="alert alert-danger">
+                        @Model.ErrorMessage
+                    </div>
+                }
+
+                @if (!string.IsNullOrEmpty(Model.SuccessMessage))
+                {
+                    <div class="alert alert-success">
+                        @Model.SuccessMessage
+                    </div>
+                }
+
+                <form method="post">
+                    <div class="mb-3">
+                        <label for="userPrompt" class="form-label">What image do you want to generate?</label>
+                        <textarea class="form-control" id="userPrompt" name="UserPrompt" rows="3"
+                                  placeholder="Describe the image you want to create..." required>@Model.UserPrompt</textarea>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-4">
+                            <label for="imageSize" class="form-label">Size</label>
+                            <select class="form-select" id="imageSize" name="ImageSize">
+                                <option value="1024x1024" selected>1024 x 1024 (Square)</option>
+                                <option value="1792x1024">1792 x 1024 (Landscape)</option>
+                                <option value="1024x1792">1024 x 1792 (Portrait)</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="quality" class="form-label">Quality</label>
+                            <select class="form-select" id="quality" name="Quality">
+                                <option value="hd" selected>HD (High Definition)</option>
+                                <option value="standard">Standard</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="style" class="form-label">Style</label>
+                            <select class="form-select" id="style" name="Style">
+                                <option value="vivid" selected>Vivid</option>
+                                <option value="natural">Natural</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-success btn-lg w-100" type="submit" id="generateBtn">
+                        <span class="spinner-border spinner-border-sm d-none" id="spinner" role="status"></span>
+                        🎨 Generate Image
+                    </button>
+                </form>
+
+
+                <div class="mt-4">
+                    <hr>
+                    <h6>Generated Image:</h6>
+                    @if (!string.IsNullOrEmpty(Model.GeneratedImagePath))
+                    {
+                        <div class="text-center">
+                            <img src="@Model.GeneratedImagePath" class="img-fluid rounded shadow" alt="Generated Image" style="max-width: 100%; height: auto;">
+                        </div>
+                        <div class="mt-2 text-center">
+                            <small class="text-muted">Prompt: "@Model.UserPrompt"</small>
+                        </div>
+                    }
+                </div>
+
+
+                @if (Model.IsGenerating)
+                {
+                    <div class="mt-4 text-center">
+                        <div class="spinner-border text-success" role="status">
+                            <span class="visually-hidden">Generating...</span>
+                        </div>
+                        <p class="mt-2 text-muted">Generating your image, please wait...</p>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.querySelector('form').addEventListener('submit', function() {
+        const btn = document.getElementById('generateBtn');
+        const spinner = document.getElementById('spinner');
+        btn.disabled = true;
+        spinner.classList.remove('d-none');
+        btn.innerHTML = '<span class="spinner-border spinner-border-sm" role="status"></span> Generating...';
+    });
+</script>

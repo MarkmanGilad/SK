@@ -1,0 +1,102 @@
+﻿@page
+@model Lesson_11_Razor_Pages.Pages.Voice_GenModel
+@{
+    ViewData["Title"] = "Voice Generator";
+}
+
+<div class="row justify-content-center mt-5">
+    <div class="col-md-8">
+        <div class="card shadow">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0">🗣️ AI Voice Generator</h5>
+            </div>
+            <div class="card-body">
+                @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+                {
+                    <div class="alert alert-danger">
+                        @Model.ErrorMessage
+                    </div>
+                }
+
+                @if (!string.IsNullOrEmpty(Model.SuccessMessage))
+                {
+                    <div class="alert alert-success">
+                        @Model.SuccessMessage
+                    </div>
+                }
+
+                <form method="post">
+                    <div class="mb-3">
+                        <label for="userPrompt" class="form-label">What text do you want to convert to voice?</label>
+                        <textarea class="form-control" id="userPrompt" name="UserPrompt" rows="3"
+                                  placeholder="Enter text..." required>@Model.UserPrompt</textarea>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-4">
+                            <label for="voice" class="form-label">Voice</label>
+                            <select class="form-select" id="voice" name="Voice">
+                                <option value="nova" selected>Nova</option>
+                                <option value="alloy">Alloy</option>
+                                <option value="echo">Echo</option>
+                                <option value="fable">Fable</option>
+                                <option value="onyx">Onyx</option>
+                                <option value="shimmer">Shimmer</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="format" class="form-label">Format</label>
+                            <select class="form-select" id="format" name="Format">
+                                <option value="mp3" selected>MP3</option>
+                                <option value="opus">Opus</option>
+                                <option value="aac">AAC</option>
+                                <option value="flac">FLAC</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="speed" class="form-label">Speed</label>
+                            <input type="number" step="0.01" min="0.25" max="4.0" class="form-control" id="speed" name="Speed" value="@Model.Speed" />
+                        </div>
+                    </div>
+                    <button class="btn btn-primary btn-lg w-100" type="submit" id="generateBtn">
+                        <span class="spinner-border spinner-border-sm d-none" id="spinner" role="status"></span>
+                        🗣️ Generate Voice
+                    </button>
+                </form>
+
+                <div class="mt-4">
+                    <hr>
+                    <h6>Generated Audio:</h6>
+                    @if (!string.IsNullOrEmpty(Model.GeneratedAudioPath))
+                    {
+                        <div class="text-center">
+                            <audio controls src="@Model.GeneratedAudioPath" class="w-100"></audio>
+                        </div>
+                        <div class="mt-2 text-center">
+                            <small class="text-muted">Prompt: "@Model.UserPrompt"</small>
+                        </div>
+                    }
+                </div>
+
+                @if (Model.IsGenerating)
+                {
+                    <div class="mt-4 text-center">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Generating...</span>
+                        </div>
+                        <p class="mt-2 text-muted">Generating your audio, please wait...</p>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.querySelector('form').addEventListener('submit', function() {
+        const btn = document.getElementById('generateBtn');
+        const spinner = document.getElementById('spinner');
+        btn.disabled = true;
+        spinner.classList.remove('d-none');
+        btn.innerHTML = '<span class="spinner-border spinner-border-sm" role="status"></span> Generating...';
+    });
+</script>
