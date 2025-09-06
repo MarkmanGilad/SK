@@ -10,7 +10,7 @@
   <ItemGroup>
     <PackageReference Include="DotNetEnv" Version="3.1.1" />
     <PackageReference Include="Microsoft.SemanticKernel" Version="1.64.0" />
-    <PackageReference Include="PdfPig" Version="0.1.12-alpha-20250815-3650e" />
+    <PackageReference Include="PdfPig" Version="0.1.12-alpha-20250903-e4ed4" />
   </ItemGroup>
 
   <ItemGroup>

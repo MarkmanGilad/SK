@@ -80,6 +80,24 @@
         opacity: 0.65;
     }
 
+.btn-outline-purple {
+    color: #6f42c1;
+    border-color: #6f42c1;
+}
+
+    .btn-outline-purple:hover {
+        background-color: #6f42c1;
+        border-color: #6f42c1;
+        color: white;
+    }
+
+.bg-purple {
+    background-color: #6f42c1 !important;
+}
+
+.text-purple {
+    color: #6f42c1 !important;
+}
 
 
 /* Author Section Styles */
@@ -125,4 +143,41 @@
         font-size: 0.9rem;
         padding: 5px 12px;
     }
+}
+
+/* Add this to your existing style.css */
+
+/* BIDI Support for Mixed Language Content */
+.bidi-content {
+    direction: ltr;
+    unicode-bidi: normal;
+}
+
+    .bidi-content.rtl {
+        direction: rtl;
+        text-align: right;
+    }
+
+/* Hebrew text with proper BIDI handling */
+.hebrew-bidi {
+    direction: rtl;
+    unicode-bidi: plaintext;
+    text-align: right;
+    font-family: 'Segoe UI', 'Arial Hebrew', 'David', 'Tahoma', sans-serif;
+    line-height: 1.6;
+}
+
+/* Mixed content (Hebrew + English/Numbers) */
+.mixed-bidi {
+    direction: rtl;
+    unicode-bidi: plaintext;
+    text-align: start; /* Bootstrap's direction-aware alignment */
+    font-family: 'Segoe UI', 'Arial Hebrew', 'David', sans-serif;
+}
+
+/* English content in RTL context */
+.ltr-in-rtl {
+    direction: ltr;
+    unicode-bidi: embed;
+    display: inline-block;
 }

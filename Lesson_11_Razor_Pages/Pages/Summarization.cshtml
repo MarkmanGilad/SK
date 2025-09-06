@@ -1,0 +1,117 @@
+﻿@page
+@model Lesson_11_Razor_Pages.Pages.SummarizationModel
+@{
+    ViewData["Title"] = "PDF Summarizer";
+}
+
+<div class="row justify-content-center mt-5">
+    <div class="col-md-10">
+        <div class="card shadow">
+            <div class="card-header bg-purple text-white">
+                <h5 class="mb-0">📄 AI PDF Summarizer</h5>
+            </div>
+            <div class="card-body">
+                @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+                {
+                    <div class="alert alert-danger">
+                        @Model.ErrorMessage
+                    </div>
+                }
+
+                @if (!string.IsNullOrEmpty(Model.SuccessMessage))
+                {
+                    <div class="alert alert-success">
+                        @Model.SuccessMessage
+                    </div>
+                }
+
+                <form method="post" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label for="pdfFile" class="form-label">Select PDF file to summarize</label>
+                        <input type="file" class="form-control" id="pdfFile" asp-for="PdfFile" accept=".pdf" required>
+                        <div class="form-text">Upload a PDF document for AI-powered summarization.</div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-4">
+                            <label for="language" class="form-label">Summary Language</label>
+                            <select class="form-select" id="language" asp-for="Language">
+                                <option value="English">English</option>
+                                <option value="Hebrew">Hebrew</option>
+                                <option value="Spanish">Spanish</option>
+                                <option value="French">French</option>
+                                <option value="German">German</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="pagesPerChunk" class="form-label">Pages per Chunk</label>
+                            <input type="number" class="form-control" id="pagesPerChunk" asp-for="PagesPerChunk"
+                                   min="1" max="20" />
+                            <div class="form-text">How many pages to process together</div>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="groupSize" class="form-label">Group Size</label>
+                            <input type="number" class="form-control" id="groupSize" asp-for="GroupSize"
+                                   min="1" max="10" />
+                            <div class="form-text">Number of summaries to merge at once</div>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-purple btn-lg w-100" type="submit" id="summarizeBtn">
+                        <span class="spinner-border spinner-border-sm d-none" id="spinner" role="status"></span>
+                        📄 Summarize PDF
+                    </button>
+                </form>
+
+
+                @if (!string.IsNullOrEmpty(Model.SummaryResult))
+                {
+                    <div class="mt-4">
+                        <hr>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h6>Summary Result:</h6>
+                            @if (!string.IsNullOrEmpty(Model.SummaryFilePath))
+                            {
+                                <a href="@Model.SummaryFilePath" class="btn btn-outline-purple btn-sm" download>
+                                    <i class="bi bi-download me-1"></i>Download Summary
+                                </a>
+                            }
+                        </div>
+                        <div class="card mt-2" >
+                            <div class="card-body bg-light">
+                                <pre class="mb-0 @(Model.Language == "Hebrew" ? "mixed-bidi" : "bidi-content")"
+                                     style="white-space: pre-wrap; font-family: 'Segoe UI', sans-serif; font-size: 0.9rem;">
+                                    @Model.SummaryResult
+                                </pre>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+                @if (Model.IsSummarizing)
+                {
+                    <div class="mt-4 text-center">
+                        <div class="spinner-border text-purple" role="status">
+                            <span class="visually-hidden">Summarizing...</span>
+                        </div>
+                        <p class="mt-2 text-muted">Processing your PDF, this may take a few minutes...</p>
+                        <div class="progress mt-2">
+                            <div class="progress-bar progress-bar-striped progress-bar-animated bg-purple" 
+                                 role="progressbar" style="width: 100%"></div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.querySelector('form').addEventListener('submit', function() {
+        const btn = document.getElementById('summarizeBtn');
+        const spinner = document.getElementById('spinner');
+        btn.disabled = true;
+        spinner.classList.remove('d-none');
+        btn.innerHTML = '<span class="spinner-border spinner-border-sm" role="status"></span> Processing...';
+    });
+</script>

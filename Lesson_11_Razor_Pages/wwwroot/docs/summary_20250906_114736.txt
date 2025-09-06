@@ -1,0 +1,25 @@
+- The report examines the impact of Artificial Intelligence (AI) and automation on Israel’s labor market from 2018 to 2023, situating findings within global technological and economic trends.
+- Key AI technologies discussed include advanced large language models such as ChatGPT and Gemini, noted for their natural language processing and generation capabilities.
+- AI’s dual role is emphasized: it drives productivity gains and creates new job opportunities but also risks job displacement, especially in routine manual and cognitive tasks.
+- Empirical data from 2022–2023 indicate that approximately 60% of the workforce is affected by automation technologies, with significant variation by sector, occupation, and demographic group.
+- Israel experienced a 29% increase in employment in 2021 compared to 2020, alongside a 2% decrease in unemployment, reflecting post-pandemic recovery with uneven effects across sectors and populations.
+- The report references extensive international research, including studies by Acemoglu et al. (2022), Agrawal et al. (2018, 2019), Felten et al. (2019, 2023), Webb (2020), and reports from the White House (2022), OECD (2023), and World Economic Forum (2024).
+- Measurement frameworks such as AI Occupational Impact (AIOI), task-based analyses, and expert surveys are highlighted as essential tools for assessing AI’s labor market effects and guiding policy.
+- Public opinion surveys reveal mixed perceptions: about 75% of workers view automation as a threat to routine jobs, yet there is also optimism about new opportunities arising from AI.
+- The report stresses the need for Israeli policy responses including workforce retraining, education reform, and social safety nets to mitigate risks and harness AI benefits.
+- Inflation dynamics in Israel from 2018 to 2023 are analyzed, showing heterogeneous effects by income decile, geographic region, household ownership, and economic sector (housing, food, energy, services).
+- The COVID-19 pandemic significantly influenced both inflation and labor market trends, causing disruptions and uneven recovery across sectors and demographic groups.
+- Structural labor market changes include shifts in job types, increased remote work, and new employment patterns emerging post-pandemic.
+- Historical context is provided, referencing resistance to technological change (e.g., Luddites) and the concept of “complex society” to frame the interplay between technology, social organization, and economic structures.
+- Detailed occupational data analyses use ISCO-coded classifications and large datasets (~680,000 workers), revealing heterogeneous AI exposure and labor market segmentation by gender, ethnicity (Israeli Jews and Arabs), and occupation.
+- Regression analyses show statistically significant relationships between occupational characteristics, social-economic variables, education, and employment outcomes.
+- The report highlights persistent labor market inequalities and segmentation, underscoring the importance of nuanced, inclusive policy frameworks.
+- Challenges in data collection and integration are noted, with calls for improved methodologies and collaboration among government, academia, and industry.
+- Israeli researchers affiliated with the Taub Center for Social Policy Studies provide a locally relevant perspective, integrating international research and local empirical data.
+- The report advocates ongoing interdisciplinary research combining economics, labor market analysis, and technology assessment to refine understanding and policy approaches.
+
+---
+
+**Abstract:**
+
+This comprehensive report analyzes the multifaceted impact of Artificial Intelligence and automation on Israel’s labor market from 2018 to 2023, contextualized within global technological advances and economic shifts. It highlights AI’s dual potential to enhance productivity and create jobs while posing risks of displacement, particularly for routine tasks. Empirical data reveal significant labor market transformations, including post-pandemic employment growth and persistent inequalities by sector, ethnicity, and gender. The report underscores the importance of robust measurement frameworks, targeted workforce retraining, and inclusive policy interventions to manage AI-driven transitions. Additionally, it examines inflation dynamics and structural labor market changes influenced by the COVID-19 pandemic. Drawing on international studies and local data, the report calls for interdisciplinary research and coordinated policy responses to maximize AI’s benefits and mitigate social risks.

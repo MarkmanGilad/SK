@@ -1,0 +1,75 @@
+[pages 1-5]
+
+- Publication Details:
+  - Title: "The Dangers of Artificial Intelligence"
+  - Author: Velibor Božić, General Hospital Koprivnica
+  - Preprint published May 2023
+  - Author has 708 publications and 270 citations
+  - Document uploaded on ResearchGate on 21 May 2025
+
+- Abstract and Introduction:
+  - AI has transformative potential in healthcare, education, efficiency, and productivity.
+  - Risks include bias, lack of transparency, unemployment, malicious use, and over-dependency.
+  - Uncontrolled AI use may increase inequality and privacy loss.
+  - Mitigation requires regulations, ethical frameworks, auditing, accountability, collaborative development, education, and awareness.
+  - Responsible and ethical AI development is essential to maximize benefits and minimize harms.
+
+- Potential Dangers of AI:
+  1. **Bias**:
+     - AI can perpetuate and amplify societal biases if trained on biased data.
+     - Example: Hiring algorithms favoring men over women despite equal qualifications.
+     - Bias in criminal justice AI can lead to unfair bail, sentencing, and parole decisions.
+     - Ethical development needed to avoid discrimination and harm.
+  
+  2. **Lack of Transparency**:
+     - AI decisions affecting lives must be explainable and transparent.
+     - In healthcare, non-transparent AI diagnoses can cause mistrust.
+     - In criminal justice, opaque AI decisions can erode trust and fairness.
+     - AI systems should be designed for explainability and accountability.
+  
+  3. **Unemployment**:
+     - AI automation threatens jobs, especially routine and low-skilled roles.
+     - Could worsen economic inequality by displacing vulnerable workers.
+     - Policymakers should promote reskilling and upskilling focusing on creativity, critical thinking, and emotional intelligence.
+  
+  4. **Malicious Use**:
+     - AI can be weaponized (e.g., autonomous weapons) or used to create deepfakes spreading misinformation.
+     - AI can facilitate cyberattacks and cybercrime.
+     - Calls for policies and regulations to ensure ethical AI use and resilience against malicious attacks.
+  
+  5. **Big Dependency**:
+     - Over-reliance on AI may degrade human critical thinking and decision-making.
+     - Dependence on AI for navigation or knowledge could reduce human adaptability.
+     - AI should augment, not replace, human capabilities.
+     - Collaborative human-AI systems are preferred to maintain human agency.
+
+- Mitigation Strategies:
+  - Regulation and oversight to enforce responsible AI development and deployment.
+  - Public education and awareness about AI risks and benefits.
+  - Designing AI for transparency and explainability.
+  - Promoting human-machine collaboration.
+  - Investing in research to improve AI resilience, bias detection, and adaptability.
+
+- Examples of Uncontrolled AI Use:
+  - Facial recognition: biased and inaccurate, leading to false arrests.
+  - Autonomous vehicles: accidents caused by AI errors, e.g., 2018 Uber self-driving car fatality.
+  - Predictive policing: biased algorithms leading to over-policing marginalized groups.
+  - Hiring algorithms: discrimination lawsuits due to biased candidate screening.
+
+- Tools for Controlling AI Use:
+  - Regulations and standards addressing privacy, transparency, and bias.
+  - Ethical frameworks guiding fairness and accountability.
+  - Auditing AI systems for bias and ethical compliance.
+  - Collaborative development involving stakeholders affected by AI.
+  - Education campaigns to promote responsible AI use.
+
+- Conclusion:
+  - AI offers significant societal benefits but poses serious risks if unchecked.
+  - Responsible, ethical development with regulatory and educational measures is critical.
+  - Ensuring AI benefits society while minimizing harm requires transparency, accountability, collaboration, and awareness.
+
+- References:
+  - Key cited works include studies on AI bias, transparency, job impacts, malicious use, ethical guidelines, and regulatory approaches.
+  - Notable references: Buolamwini & Gebru (2018) on bias, Weller & Wu (2020) on transparency, World Economic Forum (2020) on jobs, Brundage et al. (2018) on malicious use, Harari (2018) on societal impacts, European Commission (2020) on AI policy. 
+
+Note: The summary is based on pages 1-5; any further context or continuation beyond these pages is not included.
