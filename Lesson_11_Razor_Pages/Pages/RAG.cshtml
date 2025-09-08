@@ -7,7 +7,8 @@
 
 <div class="row justify-content-center mt-5">
     <div class="col-md-10">
-        <!-- Document Management Section - Always Visible -->
+
+        <!-- Document Management Section -->
         <div class="card shadow mb-4">
             <div class="card-header bg-info text-white">
                 <h5 class="mb-0">📚 Document Management</h5>
@@ -32,7 +33,7 @@
                         <form method="post" asp-page-handler="Upload" enctype="multipart/form-data" class="d-flex" id="uploadForm">
                             <input type="file" class="form-control me-2" asp-for="PdfFile" accept=".pdf" required id="fileInput">
                             <button class="btn btn-info" type="submit" id="uploadBtn">
-                                <span class="spinner-border spinner-border-sm d-none" id="uploadSpinner" role="status"></span>
+                                <span class="spinner-border spinner-border-sm d-none" id="uploadSpinner" role="status" aria-hidden="true"></span>
                                 <span id="uploadText">📚 Load PDF</span>
                             </button>
                         </form>
@@ -94,7 +95,7 @@
             </div>
         </div>
 
-        <!-- Chat Section - Always Visible -->
+        <!-- Chat Section -->
         <div class="card shadow">
             <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
                 <h5 class="mb-0">🤖 AI Chat @(Model.IsDocumentLoaded ? "(RAG Mode)" : "(General Mode)")</h5>
@@ -144,13 +145,14 @@
                 }
             </div>
             <div class="card-footer">
-                <form method="post" asp-page-handler="Chat">
+                <form method="post" asp-page-handler="Chat" id="chatForm">
                     <div class="input-group">
                         <input type="text" name="UserMessage" class="form-control" 
                                placeholder="@(Model.IsDocumentLoaded ? "Ask a question about your documents..." : "Ask me anything...")" 
                                aria-label="Message" autocomplete="off" required id="messageInput" />
-                        <button class="btn btn-primary" type="submit">
-                            <i class="bi bi-send"></i> Send
+                        <button class="btn btn-primary" type="submit" id="chatBtn">
+                            <span class="spinner-border spinner-border-sm d-none" id="chatSpinner" role="status" aria-hidden="true"></span>
+                            <span id="chatText"><i class="bi bi-send"></i> Send</span>
                         </button>
                     </div>
                 </form>
