@@ -1,0 +1,162 @@
+﻿@page
+@model Lesson_11_Razor_Pages.Pages.RAGModel
+@using Microsoft.SemanticKernel.ChatCompletion;
+@{
+    ViewData["Title"] = "RAG Chat System";
+}
+
+<div class="row justify-content-center mt-5">
+    <div class="col-md-10">
+        <!-- Document Management Section - Always Visible -->
+        <div class="card shadow mb-4">
+            <div class="card-header bg-info text-white">
+                <h5 class="mb-0">📚 Document Management</h5>
+            </div>
+            <div class="card-body">
+                @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+                {
+                    <div class="alert alert-danger">
+                        @Model.ErrorMessage
+                    </div>
+                }
+
+                @if (!string.IsNullOrEmpty(Model.SuccessMessage))
+                {
+                    <div class="alert alert-success">
+                        @Model.SuccessMessage
+                    </div>
+                }
+
+                <div class="row">
+                    <div class="col-md-8">
+                        <form method="post" asp-page-handler="Upload" enctype="multipart/form-data" class="d-flex" id="uploadForm">
+                            <input type="file" class="form-control me-2" asp-for="PdfFile" accept=".pdf" required id="fileInput">
+                            <button class="btn btn-info" type="submit" id="uploadBtn">
+                                <span class="spinner-border spinner-border-sm d-none" id="uploadSpinner" role="status"></span>
+                                <span id="uploadText">📚 Load PDF</span>
+                            </button>
+                        </form>
+                        <div class="form-text mt-1" id="fileHint">Select a PDF file to upload and index for RAG chat.</div>
+                    </div>
+                    <div class="col-md-4">
+                        <form method="post" asp-page-handler="ClearCollection" class="d-inline">
+                            <button type="submit" class="btn btn-warning w-100" id="clearBtn">
+                                🗑️ Clear Documents
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Processing Section (Hidden by default) -->
+                <div class="mt-3 d-none" id="processingSection">
+                    <div class="card bg-light">
+                        <div class="card-body">
+                            <h6 class="text-info mb-3">📋 Processing PDF...</h6>
+                            <div class="row text-center">
+                                <div class="col-3">
+                                    <div class="text-muted" id="step1">1. Reading PDF</div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="text-muted" id="step2">2. Extracting Text</div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="text-muted" id="step3">3. Creating Chunks</div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="text-muted" id="step4">4. Indexing</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Loaded Documents Display -->
+                @if (Model.LoadedDocuments.Any())
+                {
+                    <div class="mt-3">
+                        <h6 class="text-info mb-2">📄 Loaded Documents (@Model.LoadedDocuments.Count):</h6>
+                        <div class="d-flex flex-wrap gap-2">
+                            @foreach (var doc in Model.LoadedDocuments)
+                            {
+                                <span class="badge bg-success px-3 py-2">
+                                    📄 @doc
+                                </span>
+                            }
+                        </div>
+                    </div>
+                }
+                else if (Model.IsDocumentLoaded)
+                {
+                    <div class="mt-2">
+                        <span class="badge bg-success">📄 Documents Loaded</span>
+                    </div>
+                }
+            </div>
+        </div>
+
+        <!-- Chat Section - Always Visible -->
+        <div class="card shadow">
+            <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">🤖 AI Chat @(Model.IsDocumentLoaded ? "(RAG Mode)" : "(General Mode)")</h5>
+                <form method="post" asp-page-handler="ClearChat" class="d-inline">
+                    <button type="submit" class="btn btn-light btn-sm">
+                        🗑️ Clear Chat
+                    </button>
+                </form>
+            </div>
+            <div class="card-body" style="height: 400px; overflow-y: auto;" id="chatArea">
+                @foreach (var msg in Model.History)
+                {
+                    <div class="mb-3">
+                        @if (msg.Role == AuthorRole.User)
+                        {
+                            <div class="d-flex justify-content-end">
+                                <div class="card bg-primary text-white" style="max-width: 70%;">
+                                    <div class="card-body py-2">
+                                        <strong>You:</strong> @Html.Raw(msg.Content)
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        else if (msg.Role == AuthorRole.System)
+                        {
+                            <div class="d-flex justify-content-center">
+                                <div class="card bg-warning text-dark" style="max-width: 90%;">
+                                    <div class="card-body py-2">
+                                        <strong>🔍 System:</strong>
+                                        <div style="white-space: pre-wrap; font-size: 0.9em; margin-top: 8px;">@Html.Raw(msg.Content)</div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        else if (msg.Role == AuthorRole.Assistant)
+                        {
+                            <div class="d-flex justify-content-start">
+                                <div class="card bg-light" style="max-width: 70%;">
+                                    <div class="card-body py-2">
+                                        <strong>🤖 AI:</strong> 
+                                        <div style="white-space: pre-wrap;">@Html.Raw(msg.Content)</div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                }
+            </div>
+            <div class="card-footer">
+                <form method="post" asp-page-handler="Chat">
+                    <div class="input-group">
+                        <input type="text" name="UserMessage" class="form-control" 
+                               placeholder="@(Model.IsDocumentLoaded ? "Ask a question about your documents..." : "Ask me anything...")" 
+                               aria-label="Message" autocomplete="off" required id="messageInput" />
+                        <button class="btn btn-primary" type="submit">
+                            <i class="bi bi-send"></i> Send
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/js/RAG.js"></script>
