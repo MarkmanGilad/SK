@@ -23,6 +23,27 @@
 
 ---
 
+> **🧩 Required NuGet Packages**
+>
+> Install the following NuGet packages before running the project:
+>
+> - `DotNetEnv`
+> - `iText7` (for PDF processing)
+> - `UglyToad.PdfPig` (for PDF processing)
+> - `Microsoft.SemanticKernel`
+> - `Microsoft.AspNetCore.Session` (required for session support in Razor Pages)
+>
+> You can install them using the following command in the Package Manager Console:
+> ```
+> Install-Package DotNetEnv
+> Install-Package iText7
+> Install-Package UglyToad.PdfPig
+> Install-Package Microsoft.SemanticKernel
+> Install-Package Microsoft.AspNetCore.Session
+> ```
+> Or add them via the NuGet Package Manager in Visual Studio.
+
+---
 
 [![.NET 8](https://img.shields.io/badge/.NET-8.0-blue.svg)](https://dotnet.microsoft.com/)
 [![Razor Pages](https://img.shields.io/badge/ASP.NET-Razor%20Pages-blueviolet)](https://learn.microsoft.com/aspnet/core/razor-pages/)
