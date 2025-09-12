@@ -1,5 +1,29 @@
 ﻿# 🤖 Semantic Kernel Tutorial with ASP.NET Core Razor Pages
 
+---
+
+> **⚠️ Environment Setup Required**
+>
+> 1. **API Keys:**  
+>    - This project requires API keys for OpenAI and Tavily.
+> 2. **.env File:**  
+>    - Copy the provided `.env_example` file and rename it to `.env` in the project root.
+>    - Open the new `.env` file and enter your API keys:
+>      - For OpenAI, **use the same key** for both `OpenAIKey` and `OPENAI_API_KEY`.
+>      - For Tavily, enter your Tavily API key in `TAVILY_API_KEY`.
+>
+> Example:
+> ```
+> OpenAIKey=sk-...your-openai-key...
+> OPENAI_API_KEY=sk-...your-openai-key...
+> TAVILY_API_KEY=...your-tavily-key...
+> ```
+> - **Do not use spaces in the key values.**
+> - Your application will not run without these keys set.
+
+---
+
+
 [![.NET 8](https://img.shields.io/badge/.NET-8.0-blue.svg)](https://dotnet.microsoft.com/)
 [![Razor Pages](https://img.shields.io/badge/ASP.NET-Razor%20Pages-blueviolet)](https://learn.microsoft.com/aspnet/core/razor-pages/)
 [![Semantic Kernel](https://img.shields.io/badge/Microsoft-Semantic%20Kernel-0078D4)](https://github.com/microsoft/semantic-kernel)
