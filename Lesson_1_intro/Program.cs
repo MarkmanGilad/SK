@@ -6,7 +6,7 @@ using DotNetEnv;
 
 Env.Load(@"C:\Users\Gilad\source\repos\SK\.env");  
 var OpenAIKey = Environment.GetEnvironmentVariable("OpenAIKey");
-
+//string OpenAIKey = "...";
 string model = "gpt-5-mini"; //"gpt-4.1-mini";
 
 // Create a Semantic Kernel builder instance
@@ -22,7 +22,7 @@ var kernel = builder.Build();
 var chatService = kernel.GetRequiredService<IChatCompletionService>();
 
 // User prompt message
-Console.Write(">> ");
+Console.Write("You >> ");
 string userMessage = Console.ReadLine();
 
 // Send the user's message to the chat model and await the response
