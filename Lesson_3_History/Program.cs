@@ -1,7 +1,5 @@
 ﻿using Microsoft.SemanticKernel;
 using Microsoft.SemanticKernel.ChatCompletion;
-using System.Net;
-using System.Runtime.InteropServices;
 using DotNetEnv;
 
 Env.Load(@"C:\Users\Gilad\source\repos\SK\.env");
@@ -22,7 +20,6 @@ var kernel = builder.Build();
 var chatService = kernel.GetRequiredService<IChatCompletionService>();
 
 ChatHistory history = new ChatHistory();
-
 
 while (true)
 {

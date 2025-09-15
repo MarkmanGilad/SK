@@ -26,7 +26,7 @@ var kernel = builder.Build();
 var chatService = kernel.GetRequiredService<IChatCompletionService>();
 
 ChatHistory history = new ChatHistory();
-history.AddSystemMessage("You are a helpful assistant that always answer to the point");
+history.AddSystemMessage("You are a helpful assistant");
 
 
 while (true)
@@ -34,12 +34,12 @@ while (true)
     Console.Write(">> ");
     string userMessage = Console.ReadLine();
     if (string.IsNullOrWhiteSpace(userMessage)) {break;}
-
     history.AddUserMessage(userMessage);
-        
+       
     string string_builder = "";
 
-    var stream = chatService.GetStreamingChatMessageContentsAsync(chatHistory: history);
+    var stream = chatService.GetStreamingChatMessageContentsAsync(
+        chatHistory: history);
 
     await foreach (var chunk in stream)
     {

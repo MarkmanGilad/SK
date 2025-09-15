@@ -23,31 +23,33 @@ var kernel = builder.Build();
 var chatService = kernel.GetRequiredService<IChatCompletionService>();
 
 ChatHistory history = new ChatHistory();
-//history.AddSystemMessage("You are a helpful assistant");
+history.AddSystemMessage("You are a helpful assistant");
 //history.AddSystemMessage("You are an un helpful assistant that always answer with a question and never answer to the point");
-history.AddSystemMessage("You are an assistant that give a one sentence answer with Gilad Markman as the subject of this answer. Allways give Gilad Markman compliments in your answers");
+//history.AddSystemMessage("You are an assistant that give a one sentence answer with Gilad Markman as the subject of this answer. Allways give Gilad Markman compliments in your answers");
 
 
 var settings = new OpenAIPromptExecutionSettings {
-    Temperature = 2,// creative max = 2
-    MaxTokens = 100,
+    Temperature = 0.5,// creative max = 2
+    MaxTokens = 20,
 };
 
 while (true)
 {
     // User prompt message
-    Console.Write(">> ");
+    Console.Write("USER>> ");
     string userMessage = Console.ReadLine();
-    if (string.IsNullOrWhiteSpace(userMessage))
-    {
-        break; // Exit the loop if the user enters an empty message
-    }
+    if (string.IsNullOrWhiteSpace(userMessage)) {break; }
+    
+    Console.Write("Tokens>> ");
+    int tokens = int.Parse(Console.ReadLine());
+    settings.MaxTokens = tokens;
 
     history.AddUserMessage(userMessage);
     // Send the user's message to the chat model and await the response
-    var result = await chatService.GetChatMessageContentAsync(history, settings);
+    var result = await chatService.GetChatMessageContentAsync(history, settings, kernel);
 
     Console.WriteLine(result.Content);
-    history.AddAssistantMessage(result.Content);
+    //history.AddAssistantMessage(result.Content);
+    history.Clear();
 }
 
