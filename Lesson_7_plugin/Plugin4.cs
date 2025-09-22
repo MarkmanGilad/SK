@@ -4,6 +4,7 @@ using Microsoft.SemanticKernel.Connectors.OpenAI;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,7 +18,7 @@ namespace Lesson_7_plugin
             [KernelFunction, Description("Return today's date in a friendly format")]
             public string GetDate()
             {
-                return DateTime.Now.ToString("dddd, MMMM dd, yyyy");
+                return DateTime.Now.ToString("dddd, MMMM dd, yyyy", CultureInfo.GetCultureInfo("en-US"));
             }
 
             [KernelFunction, Description("Return the current time (HH:mm:ss)")]
@@ -27,7 +28,7 @@ namespace Lesson_7_plugin
             }
         }
 
-        static async Task Main()
+        public async Task Run()
         {
             var builder = Kernel.CreateBuilder();
             builder.AddOpenAIChatCompletion(
@@ -35,7 +36,8 @@ namespace Lesson_7_plugin
                 apiKey: Environment.GetEnvironmentVariable("OPENAI_API_KEY"));
             var kernel = builder.Build();
 
-            kernel.ImportPluginFromObject(new DateTimePlugin(), "DateTime");
+            var dt_plugin = new DateTimePlugin();
+            kernel.ImportPluginFromObject(dt_plugin, "DateTime");
 
             // Use the newer FunctionChoiceBehavior.Auto()
             var settings = new OpenAIPromptExecutionSettings
@@ -52,7 +54,7 @@ namespace Lesson_7_plugin
 
             var reply = await kernel.GetRequiredService<IChatCompletionService>()
                                    .GetChatMessageContentAsync(history, settings, kernel);
-
+            history.AddAssistantMessage(reply.Content);
             Console.WriteLine(reply.Content);
         }
     }

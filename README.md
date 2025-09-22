@@ -4,6 +4,7 @@
 [![.NET 8](https://img.shields.io/badge/.NET-8.0-blue.svg)](https://dotnet.microsoft.com/)
 [![Razor Pages](https://img.shields.io/badge/ASP.NET-Razor%20Pages-blueviolet)](https://learn.microsoft.com/aspnet/core/razor-pages/)
 [![Semantic Kernel](https://img.shields.io/badge/Microsoft-Semantic%20Kernel-0078D4)](https://github.com/microsoft/semantic-kernel)
+[![YouTube Playlist](https://img.shields.io/badge/YouTube-Playlist-FF0000?logo=youtube&logoColor=white)](PLAYLIST_URL)
 
 ## 📋 Overview
 
@@ -12,6 +13,17 @@ This project is a comprehensive, hands-on tutorial demonstrating how to build mo
 **Created by [Gilad Markman](https://webprogramming.azurewebsites.net/)**
 
 ---
+
+## 🎥 Video Playlist
+
+Watch the complete step-by-step tutorial on YouTube:
+
+- AI Chat with web search and history
+- Image generation with DALL·E 3
+- Text-to-speech with OpenAI TTS
+- RAG with embeddings and ChromaDB
+
+[▶️ Watch the Playlist on YouTube](https://www.youtube.com/playlist?list=PLDDjraqDVBZZ4DmrwM1pD_DJHufbdodMB)
 
 ## ✨ Features
 
@@ -33,14 +45,14 @@ This project is a comprehensive, hands-on tutorial demonstrating how to build mo
 - Multiple audio formats (MP3, Opus, AAC, FLAC)
 - Adjustable speech speed (0.25x to 4.0x)
 
-### 📚 RAG Tutorial *(Coming Soon)*
+### 📚 RAG Tutorial 
 - Document upload and processing capabilities
 - AI-powered embeddings generation
 - ChromaDB vector database integration
 - Semantic search functionality
 - Interactive document chat interface
 
-### 📄 Summarization *(Coming Soon)*
+### 📄 Summarization 
 - AI-powered text summarization
 - Multiple summary length options
 - Key points extraction

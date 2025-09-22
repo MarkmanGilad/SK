@@ -1,15 +1,33 @@
-﻿using System;
-using System.Text.Json;
-using System.Threading.Tasks;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.SemanticKernel;
 using Microsoft.SemanticKernel.ChatCompletion;
-using Microsoft.Extensions.DependencyInjection;
+using System;
+using System.Globalization;
+using System.Text.Json;
+using System.Threading.Tasks;
 
 
 namespace Lesson_7_plugin
 {
     public class Plugin1
     {
+
+
+        public class AgentStep
+        {
+            public string Thought { get; set; }
+            public string Action { get; set; }   // "GetDate" or "FinalAnswer"
+            public string Input { get; set; }
+        }
+
+        public static class DateTool
+        {
+            public static string GetDate()
+            {
+                return DateTime.Now.ToString("dddd, MMMM dd, yyyy", CultureInfo.GetCultureInfo("en-US"));
+            }
+        }
+
         public async Task Run()
         {
             var builder = Kernel.CreateBuilder();
@@ -64,19 +82,5 @@ namespace Lesson_7_plugin
             }
         }
     }
-    
-    public class AgentStep
-    {
-        public string Thought { get; set; }
-        public string Action { get; set; }   // "GetDate" or "FinalAnswer"
-        public string Input { get; set; }
-    }
-
-    public static class DateTool
-    {
-        public static string GetDate()
-        {
-            return DateTime.Now.ToString("dddd, MMMM dd, yyyy");
-        }
-    }
+   
 }

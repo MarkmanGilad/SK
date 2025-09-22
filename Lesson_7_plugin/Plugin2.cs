@@ -1,8 +1,9 @@
-﻿using System;
+﻿using Microsoft.SemanticKernel;
+using Microsoft.SemanticKernel.ChatCompletion;
+using System;
+using System.Globalization;
 using System.Text.Json;
 using System.Threading.Tasks;
-using Microsoft.SemanticKernel;
-using Microsoft.SemanticKernel.ChatCompletion;
 
 
 namespace Lesson_7_plugin
@@ -20,7 +21,7 @@ namespace Lesson_7_plugin
         {
             public static string GetDate()
             {
-                return DateTime.Now.ToString("dddd, MMMM dd, yyyy");
+                return DateTime.Now.ToString("dddd, MMMM dd, yyyy", CultureInfo.GetCultureInfo("en-US"));
             }
 
             public static string GetTime()
@@ -39,17 +40,17 @@ namespace Lesson_7_plugin
 
             var chat = kernel.GetRequiredService<IChatCompletionService>();
 
-            string system = @"
+            string system = """
                 Always reply with JSON only:
                 {
-                  ""Thought"": ""why you chose the action"",
-                  ""Action"": ""GetDate"" or ""GetTime"" or ""FinalAnswer"",
-                  ""Input"": """" for tool calls, or the final answer text for FinalAnswer
+                  "Thought": "why you chose the action",
+                  "Action": "GetDate" or "GetTime" or "FinalAnswer",
+                  "Input": "" //for tool calls, or the final answer text for FinalAnswer
                 }
                 If you need today's date, use GetDate.
                 If you need the current time, use GetTime.
                 After a tool result is provided, return FinalAnswer with the result.
-                ";
+                """;
 
             var history = new ChatHistory();
             history.AddSystemMessage(system);
@@ -69,7 +70,11 @@ namespace Lesson_7_plugin
                     string result = Tools.GetDate();
                     history.AddAssistantMessage(reply.Content);
                     history.AddAssistantMessage("[TOOL] GetDate => " + result);
-                    history.AddUserMessage("Now return FinalAnswer with the result.");
+                    history.AddUserMessage("""
+                        Use the tool result above. 
+                        If you still need information, choose the a tool; 
+                        Otherwise return the full answer in Input."
+                        """);
                     continue;
                 }
 
@@ -78,7 +83,11 @@ namespace Lesson_7_plugin
                     string result = Tools.GetTime();
                     history.AddAssistantMessage(reply.Content);
                     history.AddAssistantMessage("[TOOL] GetTime => " + result);
-                    history.AddUserMessage("Now return FinalAnswer with the result.");
+                    history.AddUserMessage("""
+                        Use the tool result above. 
+                        If you still need information, choose the a tool; 
+                        Otherwise return the full answer in Input."
+                        """);
                     continue;
                 }
 

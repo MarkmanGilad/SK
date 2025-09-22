@@ -4,6 +4,7 @@ using Microsoft.SemanticKernel;
 using Microsoft.SemanticKernel.ChatCompletion;
 using Microsoft.SemanticKernel.Connectors.OpenAI;
 using System.ComponentModel;
+using System.Globalization;
 
 namespace Lesson_7_plugin
 {
@@ -18,6 +19,7 @@ namespace Lesson_7_plugin
             {
                 return DateTime.Now.ToString("dd-MM-yyyy");
             }
+            
             [KernelFunction("get_time")]
             [Description("Get Current time")]
             public string Current_time()

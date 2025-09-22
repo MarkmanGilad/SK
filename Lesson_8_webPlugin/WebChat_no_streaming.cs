@@ -29,13 +29,12 @@ namespace Lesson_8_webPlugin
             builder.AddOpenAIChatCompletion(model, OpenAIKey);
 
             // Add Tavily as a plugin named "Web" with a Search function
-
-
             var tavily = new TavilyTextSearch(
                 apiKey: TAVILY_API_KEY,
                 options: new TavilyTextSearchOptions { SearchDepth = TavilySearchDepth.Advanced });
             builder.Plugins.Add(tavily.CreateWithGetTextSearchResults("Tavily"));
-
+            
+            // Add DateTime as a plugin 
             builder.Plugins.AddFromType<DateTimePlugin>("DateTime");
 
             _kernel = builder.Build();
@@ -91,7 +90,6 @@ namespace Lesson_8_webPlugin
                         } 
                         catch { }
                         Console.WriteLine($"[{msg.Role}]: {msg.Content} {toolCalls}");
-                        // Add this anywhere in your foreach loop
                         
                         Console.ResetColor();
                     }

@@ -39,6 +39,7 @@ namespace Lesson_8_webPlugin
 
             _kernel = builder.Build();
             _chatService = _kernel.GetRequiredService<IChatCompletionService>();
+
             _settings = new OpenAIPromptExecutionSettings
             {
                 FunctionChoiceBehavior = FunctionChoiceBehavior.Auto()
