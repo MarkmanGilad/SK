@@ -4,7 +4,7 @@
 [![.NET 8](https://img.shields.io/badge/.NET-8.0-blue.svg)](https://dotnet.microsoft.com/)
 [![Razor Pages](https://img.shields.io/badge/ASP.NET-Razor%20Pages-blueviolet)](https://learn.microsoft.com/aspnet/core/razor-pages/)
 [![Semantic Kernel](https://img.shields.io/badge/Microsoft-Semantic%20Kernel-0078D4)](https://github.com/microsoft/semantic-kernel)
-[![YouTube Playlist](https://img.shields.io/badge/YouTube-Playlist-FF0000?logo=youtube&logoColor=white)](PLAYLIST_URL)
+[![YouTube Playlist](https://img.shields.io/badge/YouTube-Playlist-FF0000?logo=youtube&logoColor=white)](https://www.youtube.com/playlist?list=PLDDjraqDVBZZ4DmrwM1pD_DJHufbdodMB)
 
 ## 📋 Overview
 
