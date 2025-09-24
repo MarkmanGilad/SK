@@ -28,7 +28,6 @@ namespace Lesson_9_images
             
             string imgModel = "dall-e-3"; // "gpt-image-1"; 
             var builder = Kernel.CreateBuilder();
-                        
             builder.AddOpenAITextToImage(
                 apiKey: OpenAIKey,
                 modelId: imgModel,
@@ -60,12 +59,10 @@ namespace Lesson_9_images
             Console.WriteLine("working ....");
 
             var generated = await _textToImageService.GetImageContentsAsync(
-                input: combinedPrompt,
-                executionSettings: imageSettings,
-                kernel: _kernel);
+                input: combinedPrompt, executionSettings: imageSettings, kernel: _kernel);
 
             var gen = generated[0];
-            string generated_file = @"C:\Users\Gilad\source\repos\SK\Lesson_9_images\Img\generated_3.jpg";
+            string generated_file = @"C:\Users\Gilad\source\repos\SK\Lesson_9_images\Img\generated_4.jpg";
             gen.WriteToFile(generated_file, overwrite: true);
             Console.WriteLine("Generated: " + generated_file);
 

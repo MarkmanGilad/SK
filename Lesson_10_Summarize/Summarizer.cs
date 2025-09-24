@@ -24,7 +24,7 @@ namespace Lesson_10_Summarize
         private readonly string _language;
         private readonly string OPEN_AI_KEY;
 
-        public Summarizer()
+        public Summarizer(string language = "Hebrew")
         {
             Env.Load(@"C:\Users\Gilad\source\repos\SK\.env");
             OPEN_AI_KEY = Environment.GetEnvironmentVariable("OpenAIKey");
@@ -35,16 +35,18 @@ namespace Lesson_10_Summarize
             _kernel = builder.Build();
             _chat = _kernel.GetRequiredService<IChatCompletionService>();
             _settings = new OpenAIPromptExecutionSettings { Temperature = 0.2 };
-            _language = "Hebrew";
+            _language = language;
            
         }
 
         public async Task<string> Summarize(string pdfPath, int pagesPerChunk = 5, int groupSize = 5)
         {
             Console.WriteLine("ExtractPages...");
+            // Extract pages from pdf
             var pageTexts = ExtractPages(pdfPath); 
+            
+            // make pages chunk
             var windows = MakePageWindows(pageTexts, pagesPerChunk);
-
 
             // MAP: summarize each window using a dedicated function
             Console.WriteLine($"Mapping {pageTexts.Count} pages...");
@@ -65,17 +67,18 @@ namespace Lesson_10_Summarize
         {
             var mapSystem = $"""
                 You are summarizing a partial text segment.
-        Output detailed and comprehensive bullet points; keep all important facts, names, numbers, and dates.
-        If significant context is missing, mention this in one sentence.
-        Write the summarized page numbers at the start of the text: [pages 3-7]
-        Write your summary in {_language}.
-        """;
-            var h = new ChatHistory(mapSystem);
-            h.AddUserMessage(text);
-            var r = await _chat.GetChatMessageContentAsync(h, _settings, _kernel);
-            return r.Content ?? string.Empty;
+                Output detailed and comprehensive bullet points; keep all important facts, names, numbers, and dates.
+                If significant context is missing, mention this in one sentence.
+                Write the summarized page numbers at the start of the text: [pages 3-7]
+                Write your summary in {_language}.
+                """;
+            var history = new ChatHistory(mapSystem);
+            history.AddUserMessage(text);
+            var result = await _chat.GetChatMessageContentAsync(history, _settings, _kernel);
+            return result.Content ?? string.Empty;
         }
 
+        // ---- ExtractPages functio
         private static List<string> ExtractPages(string path)
         {
             var pages = new List<string>(256);
@@ -107,7 +110,6 @@ namespace Lesson_10_Summarize
             return windows;
         }
 
-
         // ---------- Reduce (hierarchical) ----------
         private async Task<string> ReduceManyAsync(List<string> parts, int groupSize)
         {
@@ -129,11 +131,11 @@ namespace Lesson_10_Summarize
         private async Task<string> ReduceOnceAsync(IEnumerable<string> parts)
         {
             var reduceSystem = $"""
-Combine the following bullet summaries into a detailed, comprehensive summary in {_language}.
-- Remove duplicates and contradictions
-- Keep key facts, entities, dates, numbers
-- Output 10–20 bullet points, then a 4–6 sentence abstract
-""";
+                Combine the following bullet summaries into a detailed, comprehensive summary in {_language}.
+                - Remove duplicates and contradictions
+                - Keep key facts, entities, dates, numbers
+                - Output 10–20 bullet points, then a 4–6 sentence abstract
+            """;
 
             var history = new ChatHistory(reduceSystem);
             history.AddUserMessage(string.Join("\n\n---\n\n", parts));

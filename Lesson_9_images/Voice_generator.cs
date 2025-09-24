@@ -23,10 +23,9 @@ namespace Lesson_9_images_Voice
         {
             Env.Load(@"C:\Users\Gilad\source\repos\SK\.env");
             var OpenAIKey = Environment.GetEnvironmentVariable("OpenAIKey");
-
+            
             string audioModel = "tts-1"; // or "tts-1-hd" for higher quality
             var builder = Kernel.CreateBuilder();
-
             builder.AddOpenAITextToAudio(
                 apiKey: OpenAIKey,
                 modelId: audioModel,
@@ -45,20 +44,18 @@ namespace Lesson_9_images_Voice
 
             var audioSettings = new OpenAITextToAudioExecutionSettings
             {
-                Voice = "nova",                    // Available: alloy, echo, fable, onyx, nova, shimmer
+                Voice = "shimmer",                    // Available: alloy, echo, fable, onyx, nova, shimmer
                 ResponseFormat = "mp3",             // mp3, opus, aac, flac
-                Speed = 1.0f                        // 0.25 to 4.0
+                Speed = 0.8f                        // 0.25 to 4.0
             };
 
             Console.WriteLine("working ....");
 
             var generated = await _textToAudioService.GetAudioContentAsync(
-                text: userMessage,                  
-                executionSettings: audioSettings,
-                kernel: _kernel);
+                text: userMessage, executionSettings: audioSettings, kernel: _kernel);
 
             var audio = generated;
-            string generated_file = @"C:\Users\Gilad\source\repos\SK\Lesson_9_images\Audio\generated_voice.mp3";
+            string generated_file = @"C:\Users\Gilad\source\repos\SK\Lesson_9_images\Audio\generated_voice2.mp3";
 
             // Save audio file (similar to image WriteToFile)
             byte[] audioBytes = audio.Data.Value.ToArray();
