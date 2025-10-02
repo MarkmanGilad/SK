@@ -1,0 +1,30 @@
+- Microsoft Semantic Kernel is a lightweight, open-source SDK designed to simplify building AI-powered applications by integrating AI services and functions.
+- Originally developed in C# to support Microsoft Copilots (e.g., Microsoft 365, Bing), it has been extended to Python and Java, with open-source releases and Python examples available on GitHub.
+- To run Python examples, users need either an Azure subscription with OpenAI API access or an OpenAI subscription; Azure OpenAI services are paid, though Azure offers free trials for other services.
+- Semantic Kernel provides more customization and control than LangChain but requires more coding effort.
+- Language support:
+  - Python users can use both Semantic Kernel and LangChain.
+  - JavaScript users can use LangChain but not officially Semantic Kernel (a community-supported TypeScript API exists but is unofficial).
+  - Java and .NET users can use Semantic Kernel but not LangChain.
+- The kernel acts as a lightweight object to which AI services (connectors) and functions are attached to perform AI tasks.
+- Connectors link the kernel to multiple AI services simultaneously, enabling complex workflows using different models; for example, an Azure subscription can deploy both GPT-3.5 Turbo ("gpt35") and GPT-4 ("gpt4") models loaded into the kernel.
+- Semantic functions use large language models (LLMs) to perform tasks based on prompt templates.
+- Native functions are regular Python functions for tasks not requiring LLMs, decorated with @sk_function to be importable by the kernel; for example, an image classification function using the timm library and a ConvNeXt model.
+- Plugins are collections of functions (semantic and/or native) imported into the kernel; semantic plugins organize functions in directories with two key files:
+  - config.json: defines function configuration such as preferred AI engine, temperature, max tokens, input parameters, and a description used by the kernel’s Planner.
+  - skprompt.txt: contains the prompt template with placeholders for input parameters.
+- Example semantic function: a knock-knock joke generator using a prompt template that follows the classic joke format with an input placeholder {{$input}}.
+- Plugins can be loaded into the kernel using import_semantic_skill_from_directory, which returns a dictionary of callable functions.
+- Example workflow:
+  - Load a native image classifier plugin and a semantic jokes plugin.
+  - Classify an image URL to get a label (e.g., "tiger").
+  - Use the label as input to a semantic joke function to generate a related joke.
+  - Sample output: "Why did the tiger cross the road? To show the chicken it could be done."
+- The kernel supports running multiple functions asynchronously in sequence with a shared context.
+- Code snippets illustrate loading plugins, calling functions, and chaining function calls.
+- The tutorial encourages exploring official documentation and joining a community Discord for further learning.
+- The document is authored by Lucas A. Meyer and dated September 6, 2025.
+
+**Abstract:**
+
+The Microsoft Semantic Kernel is an open-source, lightweight SDK designed to facilitate AI application development by integrating multiple AI services and functions. Initially developed in C# for Microsoft Copilots, it now supports Python and Java, offering more customization than alternatives like LangChain. The kernel allows developers to connect multiple AI models, define semantic functions using prompt templates, and incorporate native Python functions for non-LLM tasks. Plugins, organized as collections of semantic and native functions with configuration files and prompts, can be loaded into the kernel to create complex workflows. For example, an image classifier plugin can identify an image label, which is then used as input to a semantic function generating a related joke. The kernel supports asynchronous function execution and encourages community engagement for further learning.

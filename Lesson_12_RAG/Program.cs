@@ -33,7 +33,7 @@ if (loadPdf == 'Y' || loadPdf == 'y')
 
     // Load and split PDF - hardcoded path
     Console.WriteLine("Loading PDF...");
-    string path = "Lucas A. Meyer - A Quick Tour of the Semantic Kernel.pdf";//"Thedangersofartificialintelligence.pdf";// "AI-2024-HEB.pdf"; 
+    string path = "Thedangersofartificialintelligence.pdf"; // "Lucas A. Meyer - A Quick Tour of the Semantic Kernel.pdf";// "AI-2024-HEB.pdf"; 
 
     var documents = pdfLoader.LoadParagraphs(path);
     Console.WriteLine($"Loaded {documents.Count} chunks");

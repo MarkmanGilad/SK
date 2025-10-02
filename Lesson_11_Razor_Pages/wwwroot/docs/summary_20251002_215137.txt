@@ -1,0 +1,34 @@
+- Microsoft’s Semantic Kernel (SK) is an open-source SDK designed to simplify AI application development using Large Language Models (LLMs) and AI services such as vector databases.
+- The SDK is implemented in multiple languages (.NET, Python, Java), with a focus here on the .NET/C# version, which is structured into two conceptual layers:
+  - **Orchestration layer:** Manages AI resource orchestration via a dependency injection (DI) container called the “kernel.”
+  - **Connector layer:** Provides DLLs to connect to various AI cloud providers (e.g., OpenAI, Azure OpenAI, Gemini), enabling easy switching between LLM services without major code changes.
+- Semantic Kernel is open source under the MIT license, hosted at https://github.com/microsoft/semantic-kernel, with a family of related repositories including the main SDK, sample starters, chat copilot apps, indexing/vector DB plugins, and next-gen app architectures.
+- Official documentation is at https://learn.microsoft.com/en-us/semantic-kernel/overview/, and the Semantic Kernel blog provides frequent updates.
+- The community ecosystem includes YouTube presentations, developer blogs, LinkedIn Learning courses, an active Discord channel, and community office hours.
+- The SDK provides an extensive glossary covering AI and Semantic Kernel concepts such as Actions, Agents, Plugins, Prompt Templates, Retrieval Augmented Generation (RAG), Embeddings, and Vector Databases, referencing standards like ISO/IEC 42001:2023.
+- Microsoft’s Copilot Studio (Power Platform) offers a low-code environment for copilots but may incur high runtime costs at scale.
+- Vector databases (e.g., Azure AI Search) efficiently store embeddings to enable semantic search without repeated token consumption.
+- Semantic Kernel leverages advanced .NET/C# features including dependency injection, transient and singleton lifetimes, modern language constructs (record structs, pattern matching), and thread safety via Interlocked methods.
+- Running Semantic Kernel code typically involves creating a KernelBuilder, adding AI services (e.g., OpenAI chat completion), registering plugins via attributes, building the Kernel instance, and managing chat history for AI interactions.
+- The .NET solution is modular with folders for docs, samples, source code, and notebooks; it includes experimental code marked with `[assembly: Experimental]` attributes requiring pragma warning management.
+- The core SDK provides a meta-package (`SemanticKernel.dll`) aggregating common assemblies (Abstractions, Core, Connectors) for simplified referencing.
+- Internal utilities (Diagnostics, Http helpers, Linq, Type reflection) are shared across projects via MSBuild linked source files, avoiding separate assemblies.
+- The foundational `SemanticKernel.Abstractions` assembly defines key interfaces, exceptions, extension methods, builders, and kernel runtime state management.
+- The central `Kernel` class manages services, plugins, filters (function invocation, prompt rendering, auto-invocation), and provides thread-safe service resolution and asynchronous function invocation methods.
+- Kernel functions come in two types: native method functions decorated with `[KernelFunction]` attributes, and prompt-based functions using natural language templates; both support detailed metadata and invocation contexts.
+- Filters enable cross-cutting concerns like logging, telemetry, and approval workflows through asynchronous pipelines that can short-circuit execution.
+- Content abstractions model AI service interactions including chat messages with role-based authorship and chat history management.
+- The `IChatCompletionService` interface defines methods for streaming and non-streaming chat completions; connectors implement this interface.
+- The `SemanticKernel.Core` assembly builds on Abstractions, providing foundational functionality and extensive extension methods for kernel construction, plugin discovery, and function invocation.
+- The `AddFromType<T>()` extension method registers plugins by wrapping C# types with `[KernelFunction]` methods, enabling native method invocation via reflection.
+- The `KernelFunctionFromMethod` class encapsulates native method metadata and invocation logic, handling parameter evaluation and exception unwrapping.
+- OpenAI and Azure OpenAI connectors enable Semantic Kernel to interface with external AI services; Azure OpenAI builds on the OpenAI connector with minimal additions.
+- The `ClientCore` class centralizes AI client logic, managing asynchronous requests, chat completions, usage logging, and integrated function call invocation within chat responses.
+- Chat completion processing supports tool/function calls embedded in AI responses, invoking kernel functions asynchronously, handling exceptions, and updating chat history accordingly.
+- Dependency injection extensions (e.g., `AddOpenAIChatCompletion`) register OpenAI services as keyed singletons for seamless integration into Semantic Kernel applications.
+- Architectural Decision Records (ADRs) and documentation track design choices such as meta-package strategy and connector separation, reflecting an actively maintained and evolving codebase.
+
+---
+
+**Abstract:**  
+Microsoft’s Semantic Kernel is a modular, open-source SDK that streamlines AI application development by integrating Large Language Models and AI services through a layered architecture and dependency injection. The .NET implementation features a core Kernel class managing runtime state, plugins, filters, and service resolution, supporting both native method and prompt-based kernel functions with rich metadata and extensible invocation pipelines. Semantic Kernel’s connector layer enables seamless integration with cloud AI providers like OpenAI and Azure OpenAI, with the ClientCore class handling chat completions, function call embedding, and usage tracking. The SDK’s internal utilities, abstractions, and core assemblies provide foundational infrastructure, while extension methods simplify plugin registration and kernel construction. Supported by comprehensive documentation, community resources, and evolving design practices, Semantic Kernel offers a robust framework for building advanced AI-powered applications.

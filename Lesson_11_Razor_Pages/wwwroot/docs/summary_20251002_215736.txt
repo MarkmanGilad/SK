@@ -1,0 +1,23 @@
+- Microsoft Semantic Kernel (SK) is a thin, open-source SDK designed to facilitate application integration with AI services, initially developed to power Microsoft Copilots like Microsoft 365 and Bing.
+- Originally written in C#, SK has been extended to Python and Java, with Python examples available on GitHub.
+- Running SK code requires an Azure subscription with OpenAI API access or a direct OpenAI subscription; Azure offers a free trial but OpenAI services on Azure are paid.
+- SK is designed for enterprise or large-scale consumer applications, providing more customization and control than alternatives like LangChain, though it requires more coding effort.
+- Language support varies: Python supports both LangChain and SK; JavaScript supports LangChain but not officially SK (community TypeScript API exists); Java and .NET support SK but not LangChain.
+- The Semantic Kernel acts as a lightweight object to which AI-related functions and services are attached.
+- Connectors link SK to multiple AI services simultaneously, allowing complex workflows using different models; for example, an Azure subscription can deploy both "gpt35" (GPT-3.5 Turbo) and "gpt4" (GPT-4) models loaded into the same kernel.
+- Semantic functions are LLM-powered functions performing specific tasks using prompt templates with placeholders replaced by input parameters; e.g., a semantic function generating knock-knock jokes.
+- Native functions are regular Python functions performing tasks without LLMs, such as image classification using the timm library; these are decorated with `@sk_function` and imported into the kernel as native plugins.
+- Plugins are collections of functions and a key strength of SK; they come in two types: semantic plugins (collections of semantic functions) and native plugins (collections of native functions).
+- Semantic plugins require each function to reside in its own directory containing a `config.json` (defining engine preferences, temperature, input parameters, etc.) and an `skprompt.txt` file (the prompt template with placeholders).
+- Plugins are loaded into the kernel using `import_semantic_skill_from_directory`, returning a dictionary of callable functions.
+- Functions from plugins can be called sequentially or asynchronously with shared context; for example, classifying an image with a native function then generating a joke about the classified object with a semantic function.
+- Example usage includes classifying an image of a tiger and then generating a knock-knock joke or a "why did the tiger cross the road" joke.
+- The knock-knock joke semantic function prompt follows a fixed format, replacing `{{$input}}` with the input word to generate humorous responses.
+- The kernel supports asynchronous execution of multiple functions, enabling complex workflows combining native and semantic functions.
+- The article providing this overview and examples was authored by Lucas A. Meyer and published on October 15, 2023.
+- Readers are encouraged to explore official documentation and join the Semantic Kernel community Discord for further learning.
+- The summary is based on pages 1 through 6 of the source document; pages 6 and 7 may contain additional details not covered here.
+
+**Abstract:**
+
+Microsoft Semantic Kernel is an open-source SDK designed to integrate AI services into applications, offering extensive customization and control for enterprise-scale use. It supports multiple programming languages, with Python being the most fully featured, and allows simultaneous connection to multiple AI models like GPT-3.5 and GPT-4. Semantic Kernel distinguishes between semantic functions powered by large language models and native functions performing traditional tasks, both of which can be organized into plugins for modular development. Plugins consist of configuration files and prompt templates, enabling flexible and reusable AI-driven workflows. The kernel supports asynchronous execution and shared context, facilitating complex sequences such as image classification followed by joke generation. This toolkit, initially developed for Microsoft Copilots, is accessible via Azure or OpenAI subscriptions and is supported by a growing developer community.

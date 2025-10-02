@@ -78,13 +78,6 @@ namespace Lesson_12_RAG
                 sortedDocuments.Add(result.Item1.Metadata.Text);
             }
 
-
-            // Extract just the text from each result
-            //var sortedDocuments = new List<string>();
-            //foreach (var doc in foundDocuments)
-            //{
-            //    sortedDocuments.Add(doc.Record.Metadata.Text);
-            //}
             return sortedDocuments;
         }
                 

@@ -36,7 +36,8 @@ namespace Lesson_12_RAG
 
             // Step 3: Add the question with context to chat history
             var ragPrompt = $"""
-                Use the following context to answer the question. If the answer cannot be found in the context, say "I don't have information about that in the documents."
+                Use the following context to answer the question. 
+                If the answer cannot be found in the context, say "I don't have information about that in the documents."
 
                 Context:
                 {context}
