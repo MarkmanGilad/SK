@@ -6,7 +6,7 @@ using DotNetEnv;
 Env.Load(@"C:\Users\Gilad\source\repos\SK\.env");
 string openAiKey = Environment.GetEnvironmentVariable("OpenAIKey")!;
 
-Console.WriteLine("🚀 RAG System");
+Console.WriteLine("RAG System");
 Console.WriteLine("=============");
 
 // Ask if user wants to load PDF
@@ -28,22 +28,24 @@ if (loadPdf == 'Y' || loadPdf == 'y')
     if (deleteCollection == 'Y' || deleteCollection == 'y')
     {
         await chromaClient.ClearCollection();
-        Console.WriteLine("✅ Collection cleared");
+        Console.WriteLine("Collection cleared");
     }
 
     // Load and split PDF - hardcoded path
-    Console.WriteLine("📖 Loading PDF...");
-    var documents = pdfLoader.LoadParagraphs("Lucas A. Meyer - A Quick Tour of the Semantic Kernel.pdf");
-    Console.WriteLine($"✅ Loaded {documents.Count} chunks");
+    Console.WriteLine("Loading PDF...");
+    string path = "Lucas A. Meyer - A Quick Tour of the Semantic Kernel.pdf";//"Thedangersofartificialintelligence.pdf";// "AI-2024-HEB.pdf"; 
+
+    var documents = pdfLoader.LoadParagraphs(path);
+    Console.WriteLine($"Loaded {documents.Count} chunks");
 
     // Embed and save to ChromaDB
-    Console.WriteLine("🔄 Indexing documents...");
+    Console.WriteLine("Indexing documents...");
     await chromaClient.AddDocuments(documents);
-    Console.WriteLine("✅ Documents indexed");
+    Console.WriteLine("Documents indexed");
 }
 
 // Start chat loop
-Console.WriteLine("\n💬 RAG Chat Started!");
+Console.WriteLine("\nRAG Chat Started!");
 Console.WriteLine("Ask questions about your documents. Type 'quit' to exit.\n");
 
 var ragChat = new RagChat(openAiKey, "pdf_documents");
@@ -61,4 +63,4 @@ while (true)
     Console.WriteLine($"AI: {answer}\n");
 }
 
-Console.WriteLine("👋 Goodbye!");
+Console.WriteLine("Goodbye!");

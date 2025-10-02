@@ -50,11 +50,6 @@ namespace Lesson_12_RAG
             var response = await _chatService.GetChatMessageContentAsync(history);
 
             // Step 5: Add AI response to history
-            if (response.Content == null) {
-
-                history.AddAssistantMessage("I couldn't generate an answer.");
-                return "I couldn't generate an answer.";
-            }
             history.AddAssistantMessage(response.Content);
             return response.Content;
         }

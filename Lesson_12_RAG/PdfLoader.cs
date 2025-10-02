@@ -12,19 +12,13 @@ namespace Lesson_12_RAG
     {
         private readonly string _dataDir;
 
-        public PdfLoader(string? dataDir = null)
+        public PdfLoader()
         {
-            if (dataDir != null)
-            {
-                _dataDir = dataDir;
-            }
-            else
-            {
-                // Navigate from bin output directory back to project root, then to Data folder
-                var baseDir = AppContext.BaseDirectory;
-                var projectRoot = Directory.GetParent(baseDir)?.Parent?.Parent?.Parent?.FullName;
-                _dataDir = Path.Combine(projectRoot ?? baseDir, "Data");
-            }
+            // Navigate from bin output directory back to project root, then to Data folder
+            var baseDir = AppContext.BaseDirectory;
+            var projectRoot = Directory.GetParent(baseDir)?.Parent?.Parent?.Parent?.FullName;
+            _dataDir = Path.Combine(projectRoot ?? baseDir, "Data");
+
         }
 
         public List<string> LoadParagraphs(string fileName)
@@ -39,7 +33,7 @@ namespace Lesson_12_RAG
             var sb = new StringBuilder();
             using var reader = new PdfReader(path);
             using var document = new PdfDocument(reader);
-            
+
             for (int i = 1; i <= document.GetNumberOfPages(); i++)
             {
                 var page = document.GetPage(i);
@@ -47,39 +41,38 @@ namespace Lesson_12_RAG
                 sb.AppendLine(pageText);
                 sb.AppendLine(); // Blank line between pages
             }
-            
+
             return sb.ToString();
         }
 
         private static List<string> SplitIntoChunks(string text, int chunkSize = 500)
         {
             var chunks = new List<string>();
-            var sentences = Regex.Split(text, @"(?<=[.!?])\s+")
-                .Where(s => !string.IsNullOrWhiteSpace(s))
-                .ToList();
+            
+            string[] sentences = Regex.Split(text, @"(?<=[.!?])\s+");
 
-            var currentChunk = new StringBuilder();
-            
-            foreach (var sentence in sentences)
+            var current = new StringBuilder();
+
+            foreach (var raw in sentences)
             {
-                // If adding this sentence would make the chunk too long, start a new chunk
-                if (currentChunk.Length > 0 && currentChunk.Length + sentence.Length > chunkSize)
-                {
-                    chunks.Add(currentChunk.ToString().Trim());
-                    currentChunk.Clear();
-                }
+                if (string.IsNullOrWhiteSpace(raw)) continue;
+                var sentence = raw.Trim();
                 
-                if (currentChunk.Length > 0) currentChunk.Append(" ");
-                currentChunk.Append(sentence);
+                if (current.Length > 0 ) current.Append(" ");
+                current.Append(sentence);
+
+                // If adding this sentence would overflow, flush current first
+                if (current.Length > chunkSize)
+                {
+                    chunks.Add(current.ToString());
+                    current.Clear();
+                }
             }
-            
-            // Add the last chunk
-            if (currentChunk.Length > 0)
-            {
-                chunks.Add(currentChunk.ToString().Trim());
-            }
-            
-            return chunks.Where(c => c.Length > 50).ToList(); // Filter out very short chunks
+
+            if (current.Length > 0)
+                chunks.Add(current.ToString());
+
+            return chunks;
         }
     }
 }

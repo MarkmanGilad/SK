@@ -16,7 +16,8 @@ namespace Lesson_12_RAG
         private readonly Kernel _kernel;
         private readonly ChromaMemoryStore _store;
         private readonly string _collection;
-
+        private readonly IEmbeddingGenerator<string, Embedding<float>> _embeddingGenerator;
+        
         public ChromaClient(string openAiKey, string collectionName = "rag_demo",
                             string embeddingModel = "text-embedding-3-small",
                             string chromaUrl = "http://localhost:8000")
@@ -32,11 +33,11 @@ namespace Lesson_12_RAG
             
             // Ensure the collection exists (create if missing)
             _store.CreateCollectionAsync(_collection).GetAwaiter().GetResult();
+            _embeddingGenerator = _kernel.GetRequiredService<IEmbeddingGenerator<string, Embedding<float>>>();
         }
 
         public async Task AddDocuments(List<string> documents)
         {
-            int docNumber = 0;
             foreach (string document in documents)
             {
                 // Skip empty documents
@@ -47,15 +48,11 @@ namespace Lesson_12_RAG
                 string documentId = Guid.NewGuid().ToString();
 
                 // Convert text to numbers (embeddings) using AI
-                var embedding = await _kernel.GetRequiredService<IEmbeddingGenerator<string, Embedding<float>>>()
-                    .GenerateAsync(document);
+                var embedding = await _embeddingGenerator.GenerateAsync(document);
                 
                 // Create a record to store in the database
-                var record = MemoryRecord.LocalRecord(
-                    id: documentId,
-                    text: document,
-                    description: null,
-                    embedding: embedding.Vector);
+                var record = MemoryRecord.LocalRecord(id: documentId, text: document,
+                    description: null, embedding: embedding.Vector);
 
                 // Save to database (collection created automatically if it doesn't exist)
                 await _store.UpsertAsync(_collection, record);
@@ -68,27 +65,26 @@ namespace Lesson_12_RAG
         {
             
             // Convert the search question to vector (embeddings)
-            var questionEmbedding = await _kernel.GetRequiredService<IEmbeddingGenerator<string, Embedding<float>>>()
-                .GenerateAsync(question);
+            var questionEmbedding = await _embeddingGenerator.GenerateAsync(question);
 
             // Search the database for similar documents
-            var foundDocuments = new List<(MemoryRecord Record, double Score)>();
+            //var foundDocuments = new List<(MemoryRecord Record, double Score)>();
             
             var searchResults = _store.GetNearestMatchesAsync(_collection, questionEmbedding.Vector, 
                                 limit: maxResults, minRelevanceScore: 0.0, withEmbeddings: false);
-
+            var sortedDocuments = new List<string>();
             await foreach (var result in searchResults)
             {
-                foundDocuments.Add(result);
+                sortedDocuments.Add(result.Item1.Metadata.Text);
             }
 
 
             // Extract just the text from each result
-            var sortedDocuments = new List<string>();
-            foreach (var doc in foundDocuments)
-            {
-                sortedDocuments.Add(doc.Record.Metadata.Text);
-            }
+            //var sortedDocuments = new List<string>();
+            //foreach (var doc in foundDocuments)
+            //{
+            //    sortedDocuments.Add(doc.Record.Metadata.Text);
+            //}
             return sortedDocuments;
         }
                 
