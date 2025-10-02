@@ -90,7 +90,7 @@ namespace Lesson_10_Summarize
         // ---- ExtractPages function
         private static List<string> ExtractPages(string path)
         {
-            var pages = new List<string>(256);
+            var pages = new List<string>();
             using var pdf = PdfDocument.Open(path);
             foreach (var page in pdf.GetPages())
             {

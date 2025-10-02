@@ -57,6 +57,7 @@ namespace Lesson_10_Summarize
                 partials.Add(summary);
             }
             Console.WriteLine($"Reduce {partials.Count} summaries...");
+            
             // REDUCE: merge summaries hierarchically until one remains
             var final = await ReduceManyAsync(partials, groupSize);
             return final;
@@ -81,7 +82,7 @@ namespace Lesson_10_Summarize
         // ---- ExtractPages functio
         private static List<string> ExtractPages(string path)
         {
-            var pages = new List<string>(256);
+            var pages = new List<string>();
             using var pdf = PdfDocument.Open(path);
             foreach (var page in pdf.GetPages())
             {
@@ -128,7 +129,7 @@ namespace Lesson_10_Summarize
             return parts[0];
         }
 
-        private async Task<string> ReduceOnceAsync(IEnumerable<string> parts)
+        private async Task<string> ReduceOnceAsync(List<string> parts)
         {
             var reduceSystem = $"""
                 Combine the following bullet summaries into a detailed, comprehensive summary in {_language}.
