@@ -1,4 +1,4 @@
-﻿using Lesson_11._5_Embeddings;
+﻿using Lesson_11._5_Embedding;
 
 var embed = new EmbeddingDemo();
 
@@ -19,9 +19,6 @@ double simBC = embed.CosineSimilarity(embB, embC);
 Console.WriteLine($"Similarity Queen vs King:   {simAB:F3}");
 Console.WriteLine($"Similarity Queen vs Apple:  {simAC:F3}");
 Console.WriteLine($"Similarity King  vs Apple:  {simBC:F3}");
-
-
-
 
 Console.WriteLine("****************************************************");
 

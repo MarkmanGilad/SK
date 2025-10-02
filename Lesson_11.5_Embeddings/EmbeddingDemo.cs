@@ -3,7 +3,7 @@ using Microsoft.SemanticKernel;
 using DotNetEnv;
 
 #pragma warning disable SKEXP0010 
-namespace Lesson_11._5_Embeddings
+namespace Lesson_11._5_Embedding
 {
     internal class EmbeddingDemo
     {
@@ -11,7 +11,6 @@ namespace Lesson_11._5_Embeddings
         private readonly Kernel _kernel;
         private readonly IEmbeddingGenerator<string, Embedding<float>> _embeddingGenerator;
         private readonly string _embeddingModel = "text-embedding-3-small";
-
 
         public EmbeddingDemo()
         {
@@ -25,6 +24,7 @@ namespace Lesson_11._5_Embeddings
 
             _embeddingGenerator = _kernel.GetRequiredService<IEmbeddingGenerator<string, Embedding<float>>>();
         }
+        
         public async Task<Embedding<float>> EmbedAsync(string paragraph)
         {
             // Convert text to numbers (embeddings) using AI

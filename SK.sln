@@ -35,7 +35,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lesson_2_StateLess", "Lesso
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lesson_12_RAG", "Lesson_12_RAG\Lesson_12_RAG.csproj", "{9F4C802F-F926-1289-78FB-365DD105506E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lesson_11.5_Embeddings", "Lesson_11.5_Embeddings\Lesson_11.5_Embeddings.csproj", "{16D9B90A-4C04-4C87-9E64-DB6374695CF6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lesson_11.5_Embedding", "Lesson_11.5_Embeddings\Lesson_11.5_Embedding.csproj", "{16D9B90A-4C04-4C87-9E64-DB6374695CF6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
