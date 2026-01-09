@@ -5,11 +5,13 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <StartupObject>Lesson_6_streaming.Gemini</StartupObject>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="DotNetEnv" Version="3.1.1" />
     <PackageReference Include="Microsoft.SemanticKernel" Version="1.64.0" />
+    <PackageReference Include="Microsoft.SemanticKernel.Connectors.Google" Version="1.68.0-alpha" />
   </ItemGroup>
 
 </Project>

@@ -72,7 +72,7 @@ namespace Lesson_7_plugin
                     history.AddAssistantMessage("[TOOL] GetDate => " + result);
                     history.AddUserMessage("""
                         Use the tool result above. 
-                        If you still need information, choose the a tool; 
+                        If you still need information, choose a tool; 
                         Otherwise return the full answer in Input."
                         """);
                     continue;
@@ -85,7 +85,7 @@ namespace Lesson_7_plugin
                     history.AddAssistantMessage("[TOOL] GetTime => " + result);
                     history.AddUserMessage("""
                         Use the tool result above. 
-                        If you still need information, choose the a tool; 
+                        If you still need information, choose a tool; 
                         Otherwise return the full answer in Input."
                         """);
                     continue;

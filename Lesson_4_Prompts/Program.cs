@@ -1,8 +1,6 @@
 ﻿using Microsoft.SemanticKernel;
 using Microsoft.SemanticKernel.ChatCompletion;
-using Microsoft.SemanticKernel.Connectors.OpenAI;
-using System.Net;
-using System.Runtime.InteropServices;
+
 using DotNetEnv;
 
 Env.Load(@"C:\Users\Gilad\source\repos\SK\.env");

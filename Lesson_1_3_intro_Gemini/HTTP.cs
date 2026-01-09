@@ -1,12 +1,6 @@
-﻿using DotNetEnv;
-using Microsoft.SemanticKernel.ChatCompletion;
-using OpenAI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Text;
 using System.Text.Json;
+using DotNetEnv;
 
 namespace Lesson_1_3_intro_Gemini
 {
@@ -14,7 +8,8 @@ namespace Lesson_1_3_intro_Gemini
     {
         public static async Task Main(string[] args)
         {
-            string GeminiAPIKey = "AIzaSyBPsnKZ8jJZHzxuhR3ZuDQ1rEF8ztQeWv8";
+            Env.Load(@"C:\Users\Gilad\source\repos\SK\.env");
+            var GeminiAPIKey = Environment.GetEnvironmentVariable("GeminiAPIKey");
             string model = "gemini-2.5-flash";
 
             // User prompt message

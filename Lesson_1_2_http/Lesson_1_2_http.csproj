@@ -5,7 +5,7 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <StartupObject>Lesson_1_2_http.ChatExample</StartupObject>
+    <StartupObject></StartupObject>
   </PropertyGroup>
 
   <ItemGroup>

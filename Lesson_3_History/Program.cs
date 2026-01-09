@@ -26,10 +26,7 @@ while (true)
     // User prompt message
     Console.Write(">> ");
     string userMessage = Console.ReadLine();
-    if (string.IsNullOrWhiteSpace(userMessage))
-    {
-        break; // Exit the loop if the user enters an empty message
-    }
+    if (string.IsNullOrWhiteSpace(userMessage)) {break; }
 
     history.AddUserMessage(userMessage);
     // Send the user's message to the chat model and await the response

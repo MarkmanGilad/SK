@@ -1,8 +1,9 @@
-﻿
-using Microsoft.SemanticKernel;
+﻿using Microsoft.SemanticKernel;
 using Microsoft.SemanticKernel.ChatCompletion;
+using DotNetEnv;
 
-string GeminiAPIKey = "AIzaSyBPsnKZ8jJZHzxuhR3ZuDQ1rEF8ztQeWv8";
+Env.Load(@"C:\Users\Gilad\source\repos\SK\.env");
+var GeminiAPIKey = Environment.GetEnvironmentVariable("GeminiAPIKey");
 string model = "gemini-2.5-flash"; 
 
 // Create a Semantic Kernel builder instance
@@ -17,13 +18,20 @@ var kernel = builder.Build();
 // Retrieve the chat completion service from the kernel
 var chatService = kernel.GetRequiredService<IChatCompletionService>();
 
-// User prompt message
-Console.Write("You >> ");
-string userMessage = Console.ReadLine();
+while (true)
+{
+    // User prompt message
+    Console.Write(">> ");
+    string userMessage = Console.ReadLine();
+    if (string.IsNullOrWhiteSpace(userMessage))
+    {
+        break; // Exit the loop if the user enters an empty message
+    }
 
-// Send the user's message to the chat model and await the response
-var result = await chatService.GetChatMessageContentAsync(userMessage);
+    // Send the user's message to the chat model and await the response
+    var result = await chatService.GetChatMessageContentAsync(userMessage);
 
-Console.WriteLine(result);
+    Console.WriteLine(result);
+}
 
 
