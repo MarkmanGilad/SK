@@ -2,9 +2,9 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
 
-namespace Lesson_1_2_http;
+namespace Lesson_14_Http;
 
-public class OpenAIClient
+public class OpenAIClient : IDisposable
 {
     private readonly HttpClient _httpClient;
     private readonly string _model;
@@ -21,7 +21,7 @@ public class OpenAIClient
         var payload = new
         {
             model = _model,
-            messages = history.GetMessagesForApi()
+            messages = history.GetMessagesForOpenAI()
         };
 
         var content = new StringContent(JsonSerializer.Serialize(payload), Encoding.UTF8, "application/json");
@@ -44,7 +44,7 @@ public class OpenAIClient
         var payload = new
         {
             model = _model,
-            input = history.GetMessagesForApi()
+            input = history.GetMessagesForOpenAI()
         };
 
         var content = new StringContent(JsonSerializer.Serialize(payload), Encoding.UTF8, "application/json");
@@ -65,52 +65,6 @@ public class OpenAIClient
     public void Dispose()
     {
         _httpClient?.Dispose();
-    }
-}
-
-public class ChatHistory
-{
-    private readonly List<Message> _messages = new();
-
-    public void AddSystemMessage(string content)
-    {
-        _messages.Add(new Message { Role = "system", Content = content });
-    }
-
-    public void AddUserMessage(string content)
-    {
-        _messages.Add(new Message { Role = "user", Content = content });
-    }
-
-    public void AddAssistantMessage(string content)
-    {
-        _messages.Add(new Message { Role = "assistant", Content = content });
-    }
-
-    public void Clear()
-    {
-        _messages.Clear();
-    }
-
-    public IReadOnlyList<Message> GetMessages()
-    {
-        return _messages.AsReadOnly();
-    }
-
-    public object GetMessagesForApi()
-    {
-        var apiMessages = new List<object>();
-        foreach (var m in _messages)
-        {
-            apiMessages.Add(new { role = m.Role, content = m.Content });
-        }
-        return apiMessages;
-    }
-
-    public class Message
-    {
-        public string Role { get; set; } = string.Empty;
-        public string Content { get; set; } = string.Empty;
     }
 }
 
