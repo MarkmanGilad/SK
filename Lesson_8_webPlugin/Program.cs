@@ -4,5 +4,8 @@
 //var webChat = new WebChat();
 //await webChat.chat();
 
-var webChat = new WebChat_no_streaming();
+//var webChat = new WebChat_no_streaming();
+//await webChat.chat();
+
+var webChat = new WebChat_Gemini();
 await webChat.chat();

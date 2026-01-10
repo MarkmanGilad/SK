@@ -1,17 +1,15 @@
-﻿using Microsoft.SemanticKernel;
+using Microsoft.SemanticKernel;
 using Microsoft.SemanticKernel.ChatCompletion;
 using Microsoft.SemanticKernel.Connectors.OpenAI;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
+using DotNetEnv;
 
 namespace Lesson_7_plugin
 {
-    public class Plugin4
+    public class Plugin4_Gemini
     {
         public class DateTimePlugin
         {
@@ -30,37 +28,50 @@ namespace Lesson_7_plugin
 
         public async Task Run()
         {
+            Env.Load(@"C:\Users\Gilad\source\repos\SK\.env");
+            var GeminiAPIKey = Environment.GetEnvironmentVariable("GeminiAPIKey");
+            var model = "gemini-2.0-flash-exp";
+
             var builder = Kernel.CreateBuilder();
+
+            // OPENAI CONNECTOR POINTING TO GOOGLE ENDPOINT
             builder.AddOpenAIChatCompletion(
-                modelId: "gpt-4.1-mini",
-                apiKey: Environment.GetEnvironmentVariable("OPENAI_API_KEY"));
+                modelId: model,
+                apiKey: GeminiAPIKey,
+                endpoint: new Uri("https://generativelanguage.googleapis.com/v1beta/openai/")
+            );
+
             var kernel = builder.Build();
 
             var dt_plugin = new DateTimePlugin();
             kernel.ImportPluginFromObject(dt_plugin, "DateTime");
 
-            // Use the newer FunctionChoiceBehavior.Auto()
+            // Use the older ToolCallBehavior which is more compatible with non-OpenAI endpoints
             var settings = new OpenAIPromptExecutionSettings
             {
-                FunctionChoiceBehavior = FunctionChoiceBehavior.Auto()
+                ToolCallBehavior = ToolCallBehavior.AutoInvokeKernelFunctions
             };
 
             var history = new ChatHistory();
-            history.AddSystemMessage("You can use tools GetDate and GetTime as needed.");
+            history.AddSystemMessage("You are a helpful assistant. Use tools if needed.");
 
-            Console.Write("Ask your question: ");
+            Console.Write("Ask your question (Gemini): ");
             string userQuestion = Console.ReadLine();
             history.AddUserMessage(userQuestion);
 
-            var reply = await kernel.GetRequiredService<IChatCompletionService>()
-                                   .GetChatMessageContentAsync(history, settings, kernel);
+            var chatService = kernel.GetRequiredService<IChatCompletionService>();
+            
+            // Non-streaming call is safest for tool use with Gemini via OpenAI adapter
+            var reply = await chatService.GetChatMessageContentAsync(history, settings, kernel);
+            
             history.AddAssistantMessage(reply.Content);
             Console.WriteLine(reply.Content);
+            
             Console.WriteLine("\n--- Chat History ---");
             foreach (var message in history)
             {
                 Console.Write($"[{message.Role}]: {message.Content}");
-
+                
                 // Inspect items for tool calls (Assistant requests) or tool results (Tool outputs)
                 if (message.Items != null)
                 {

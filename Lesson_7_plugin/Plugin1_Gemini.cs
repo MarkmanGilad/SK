@@ -1,11 +1,8 @@
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.SemanticKernel;
 using Microsoft.SemanticKernel.ChatCompletion;
-using Microsoft.SemanticKernel.Connectors.Google;
-using System;
 using System.Globalization;
 using System.Text.Json;
-using System.Threading.Tasks;
+
 using DotNetEnv;
 
 namespace Lesson_7_plugin

@@ -3,6 +3,6 @@ using Lesson_7_plugin;
 
 Env.Load(@"C:\Users\Gilad\source\repos\SK\.env");
 
-var plugin = new Plugin1_Gemini();
+var plugin = new Plugin4();
 
 await plugin.Run();

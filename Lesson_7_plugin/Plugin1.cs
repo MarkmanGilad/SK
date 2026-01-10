@@ -1,18 +1,14 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using Microsoft.SemanticKernel;
+﻿using Microsoft.SemanticKernel;
 using Microsoft.SemanticKernel.ChatCompletion;
-using System;
 using System.Globalization;
 using System.Text.Json;
-using System.Threading.Tasks;
+
 
 
 namespace Lesson_7_plugin
 {
     public class Plugin1
     {
-
-
         public class AgentStep
         {
             public string Thought { get; set; }
@@ -33,7 +29,7 @@ namespace Lesson_7_plugin
             var builder = Kernel.CreateBuilder();
             builder.AddOpenAIChatCompletion(
                 modelId: "gpt-4.1-mini",
-                apiKey: Environment.GetEnvironmentVariable("OPENAI_API_KEY"));
+                apiKey: Environment.GetEnvironmentVariable("GeminiAPIKey"));
             var kernel = builder.Build();
 
             var chatService = kernel.GetRequiredService<IChatCompletionService>();
