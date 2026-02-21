@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.ML.Tokenizers;
+using Microsoft.ML.Tokenizers; // install using NuGet package: Microsoft.ML.Tokenizers
 
 //https://platform.openai.com/tokenizer
 
