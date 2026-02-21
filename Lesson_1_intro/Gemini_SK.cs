@@ -4,9 +4,9 @@ using Microsoft.SemanticKernel.ChatCompletion;
 
 namespace Lesson_1_intro
 {
-    public class Gemini
+    public class Gemini_SK
     {
-        public static async Task Main(string[] args)
+        public static async Task<String> Call()
         {
             Env.Load(@"C:\Users\Gilad\source\repos\SK\.env");
             var GeminiAPIKey = Environment.GetEnvironmentVariable("GeminiAPIKey");
@@ -25,13 +25,13 @@ namespace Lesson_1_intro
             var chatService = kernel.GetRequiredService<IChatCompletionService>();
 
             // User prompt message
-            Console.Write(">> ");
+            Console.Write("You (Gemini_SK)>> ");
             string userMessage = Console.ReadLine();
             
             // Send the user's message to the chat model and await the response
             var result = await chatService.GetChatMessageContentAsync(userMessage);
 
-            Console.WriteLine(result);
+            return result.Content;
             
         }
     }
