@@ -1,39 +1,23 @@
-﻿using Microsoft.SemanticKernel;
-using Microsoft.SemanticKernel.ChatCompletion;
-using System.Net;
-using System.Runtime.InteropServices;
-using DotNetEnv;
+﻿using DotNetEnv;
 
-Env.Load(@"C:\Users\Gilad\source\repos\SK\.env");
-var OpenAIKey = Environment.GetEnvironmentVariable("OpenAIKey");
+// Automatically finds .env by searching up the directory tree
+Env.TraversePath().Load();
 
-string model = "gpt-5-mini"; //"gpt-4.1-mini";
-
-// Create a Semantic Kernel builder instance
-var builder = Kernel.CreateBuilder();
-
-// Add the OpenAI chat completion service to the kernel builder
-builder.AddOpenAIChatCompletion(model, OpenAIKey);
-
-// Build the kernel with the configured services
-var kernel = builder.Build();
-
-// Retrieve the chat completion service from the kernel
-var chatService = kernel.GetRequiredService<IChatCompletionService>();
+//var chatService = new Gemini_SDK("gemini-2.5-flash");
+//var chatService = new OpenAI_SDK("gpt-5-mini");
+var chatService = new OpenAI_SDK_Response("gpt-5-mini");
 
 while (true)
 {
     // User prompt message
     Console.Write(">> ");
     string userMessage = Console.ReadLine();
-    if (string.IsNullOrWhiteSpace(userMessage))
-    {
-        break; // Exit the loop if the user enters an empty message
-    }
+    
+    if (string.IsNullOrWhiteSpace(userMessage)) {break;}
 
     // Send the user's message to the chat model and await the response
-    var result = await chatService.GetChatMessageContentAsync(userMessage);
+    var result = await chatService.Call(userMessage);
 
-    Console.WriteLine(result.Content);
+    Console.WriteLine(result);
 }
 

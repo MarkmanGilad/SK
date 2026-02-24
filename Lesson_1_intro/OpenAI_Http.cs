@@ -27,7 +27,7 @@ namespace Lesson_1_intro
             // Create the request payload
             var payload = new
             {
-                model = model,
+                model,
                 messages = new[]
                 {
                     new

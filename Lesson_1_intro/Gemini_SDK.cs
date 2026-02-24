@@ -17,7 +17,7 @@ namespace Lesson_1_intro
             var userMessage = Console.ReadLine();
 
             // Create Gemini model
-            var geminiModel = new Client(apiKey: geminiKey);
+            var geminiModel = new Client(apiKey:geminiKey);
             
             // Send the request
             var response = await geminiModel.Models.GenerateContentAsync(

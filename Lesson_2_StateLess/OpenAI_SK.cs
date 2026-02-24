@@ -1,22 +1,22 @@
-﻿using Microsoft.SemanticKernel;
-using Microsoft.SemanticKernel.ChatCompletion;
 using DotNetEnv;
+using Microsoft.SemanticKernel;
+using Microsoft.SemanticKernel.ChatCompletion;
 
 namespace Lesson_2_StateLess
 {
-    public class Gemini
+    public class OpenAI_SK
     {
-        public static async Task Main(string[] args)
+        public static async Task Call()
         {
             Env.Load(@"C:\Users\Gilad\source\repos\SK\.env");
-            var GeminiAPIKey = Environment.GetEnvironmentVariable("GeminiAPIKey");
-            string model = "gemini-2.5-flash";
+            var OpenAIKey = Environment.GetEnvironmentVariable("OpenAIKey");
+            string model = "gpt-5-mini";
 
             // Create a Semantic Kernel builder instance
             var builder = Kernel.CreateBuilder();
 
-            // Add the Gemini chat completion service to the kernel builder
-            builder.AddGoogleAIGeminiChatCompletion(model, GeminiAPIKey);
+            // Add the OpenAI chat completion service to the kernel builder
+            builder.AddOpenAIChatCompletion(model, OpenAIKey);
 
             // Build the kernel with the configured services
             var kernel = builder.Build();
@@ -27,7 +27,7 @@ namespace Lesson_2_StateLess
             while (true)
             {
                 // User prompt message
-                Console.Write("You (Gemini)>> ");
+                Console.Write(">> ");
                 string userMessage = Console.ReadLine();
                 if (string.IsNullOrWhiteSpace(userMessage))
                 {
