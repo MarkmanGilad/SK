@@ -6,6 +6,7 @@ Env.TraversePath().Load();
 var chatService = new Gemini_SDK("gemini-2.5-flash");
 //var chatService = new OpenAI_SDK("gpt-5-mini");
 //var chatService = new OpenAI_SDK_Response("gpt-5-mini");
+//var chatService = new OpenAI_SDK_Response_srv("gpt-5-mini");
 
 while (true)
 {

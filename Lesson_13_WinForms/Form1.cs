@@ -4,8 +4,7 @@ namespace Lesson_13_WinForms
 {
     public partial class Form1 : Form
     {
-        private OpenAIClient? _client;
-        private ChatHistory? _history;
+        private OpenAI_SDK_Response? _client;
 
         public Form1()
         {
@@ -16,11 +15,8 @@ namespace Lesson_13_WinForms
         private void InitializeChat()
         {
             Env.Load(@"C:\Users\Gilad\source\repos\SK\.env");
-            var apiKey = Environment.GetEnvironmentVariable("OpenAIKey");
 
-            _client = new OpenAIClient(apiKey, "gpt-5-mini");
-            _history = new ChatHistory();
-            _history.AddSystemMessage("You are a helpful assistant.");
+            _client = new OpenAI_SDK_Response("gpt-5.2");
 
             chatDisplay.AppendText("Chat ready. Type your message and press Send.\n\n");
         }
@@ -39,6 +35,13 @@ namespace Lesson_13_WinForms
             }
         }
 
+        private void clearButton_Click(object sender, EventArgs e)
+        {
+            _client!.ClearHistory();
+            chatDisplay.Clear();
+            chatDisplay.AppendText("Chat cleared. Start a new conversation.\n\n");
+        }
+
         private async Task SendMessageAsync()
         {
             var userMessage = inputTextBox.Text.Trim();
@@ -50,10 +53,7 @@ namespace Lesson_13_WinForms
             chatDisplay.AppendText($"You: {userMessage}\n");
             inputTextBox.Clear();
 
-            _history!.AddUserMessage(userMessage);
-
-            var response = await _client!.GetCompletionAsync(_history);
-            _history.AddAssistantMessage(response);
+            var response = await _client!.Call(userMessage);
             chatDisplay.AppendText($"Assistant: {response}\n\n");
 
             sendButton.Enabled = true;
@@ -61,12 +61,6 @@ namespace Lesson_13_WinForms
             inputTextBox.Focus();
             chatDisplay.SelectionStart = chatDisplay.TextLength;
             chatDisplay.ScrollToCaret();
-        }
-
-        protected override void OnFormClosing(FormClosingEventArgs e)
-        {
-            _client?.Dispose();
-            base.OnFormClosing(e);
         }
     }
 }

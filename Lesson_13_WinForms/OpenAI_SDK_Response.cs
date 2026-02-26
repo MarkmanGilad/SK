@@ -22,5 +22,10 @@ public class OpenAI_SDK_Response
 
         return response.GetOutputText();
     }
+
+    public void ClearHistory()
+    {
+        history.Clear();
+    } 
 }
 

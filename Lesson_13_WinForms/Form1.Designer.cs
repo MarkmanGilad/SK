@@ -2,15 +2,8 @@
 {
     partial class Form1
     {
-        /// <summary>
-        ///  Required designer variable.
-        /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        ///  Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -22,19 +15,17 @@
 
         #region Windows Form Designer generated code
 
-        /// <summary>
-        ///  Required method for Designer support - do not modify
-        ///  the contents of this method with the code editor.
-        /// </summary>
         private void InitializeComponent()
         {
             chatDisplay = new RichTextBox();
             inputTextBox = new TextBox();
+            clearButton = new Button();
             sendButton = new Button();
             SuspendLayout();
             // 
             // chatDisplay
             // 
+            chatDisplay.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             chatDisplay.Font = new Font("Segoe UI", 14F);
             chatDisplay.Location = new Point(20, 20);
             chatDisplay.Name = "chatDisplay";
@@ -47,20 +38,34 @@
             // 
             // inputTextBox
             // 
+            inputTextBox.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             inputTextBox.Font = new Font("Segoe UI", 14F);
             inputTextBox.Location = new Point(20, 540);
             inputTextBox.Name = "inputTextBox";
-            inputTextBox.Size = new Size(840, 38);
+            inputTextBox.Size = new Size(720, 38);
             inputTextBox.TabIndex = 1;
             inputTextBox.KeyDown += inputTextBox_KeyDown;
             // 
+            // clearButton
+            // 
+            clearButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            clearButton.Font = new Font("Segoe UI", 14F);
+            clearButton.Location = new Point(750, 540);
+            clearButton.Name = "clearButton";
+            clearButton.Size = new Size(100, 40);
+            clearButton.TabIndex = 2;
+            clearButton.Text = "Clear";
+            clearButton.UseVisualStyleBackColor = true;
+            clearButton.Click += clearButton_Click;
+            // 
             // sendButton
             // 
+            sendButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             sendButton.Font = new Font("Segoe UI", 14F);
-            sendButton.Location = new Point(870, 540);
+            sendButton.Location = new Point(860, 540);
             sendButton.Name = "sendButton";
-            sendButton.Size = new Size(110, 40);
-            sendButton.TabIndex = 2;
+            sendButton.Size = new Size(120, 40);
+            sendButton.TabIndex = 3;
             sendButton.Text = "Send";
             sendButton.UseVisualStyleBackColor = true;
             sendButton.Click += sendButton_Click;
@@ -71,6 +76,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1000, 600);
             Controls.Add(sendButton);
+            Controls.Add(clearButton);
             Controls.Add(inputTextBox);
             Controls.Add(chatDisplay);
             Name = "Form1";
@@ -83,6 +89,7 @@
 
         private RichTextBox chatDisplay;
         private TextBox inputTextBox;
+        private Button clearButton;
         private Button sendButton;
     }
 }

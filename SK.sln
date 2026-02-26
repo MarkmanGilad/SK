@@ -37,9 +37,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lesson_12_RAG", "Lesson_12_
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lesson_11.5_Embedding", "Lesson_11.5_Embeddings\Lesson_11.5_Embedding.csproj", "{16D9B90A-4C04-4C87-9E64-DB6374695CF6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lesson_13_WinForms", "Lesson_13_WinForms\Lesson_13_WinForms.csproj", "{944F768D-5272-4230-99B5-C57BE1A69DE9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinForm_1", "Lesson_13_WinForms\WinForm_1.csproj", "{944F768D-5272-4230-99B5-C57BE1A69DE9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lesson_14_Http", "Lesson_14_Http\Lesson_14_Http.csproj", "{A19B235F-FA16-40FA-9665-E0D7B81A37A2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinForm_2", "WinForm_2\WinForm_2.csproj", "{74033A08-D7AA-49D0-A015-D58463AC5964}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -107,6 +109,10 @@ Global
 		{A19B235F-FA16-40FA-9665-E0D7B81A37A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A19B235F-FA16-40FA-9665-E0D7B81A37A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A19B235F-FA16-40FA-9665-E0D7B81A37A2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{74033A08-D7AA-49D0-A015-D58463AC5964}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{74033A08-D7AA-49D0-A015-D58463AC5964}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{74033A08-D7AA-49D0-A015-D58463AC5964}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{74033A08-D7AA-49D0-A015-D58463AC5964}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
