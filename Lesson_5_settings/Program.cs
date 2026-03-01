@@ -1,55 +1,27 @@
-﻿using Microsoft.SemanticKernel;
-using Microsoft.SemanticKernel.ChatCompletion;
-using Microsoft.SemanticKernel.Connectors.OpenAI;
-using System.Net;
-using System.Runtime.InteropServices;
-using DotNetEnv;
+﻿using DotNetEnv;
 
-Env.Load(@"C:\Users\Gilad\source\repos\SK\.env");
-var OpenAIKey = Environment.GetEnvironmentVariable("OpenAIKey");
+// Automatically finds .env by searching up the directory tree
+Env.TraversePath().Load();
 
-string model = "gpt-4.1-mini";
+Console.Write("Add System Prompt>> ");
+string SystemPrompt = Console.ReadLine();
 
-// Create a Semantic Kernel builder instance
-var builder = Kernel.CreateBuilder();
+var chatService = new Gemini_SDK("gemini-3-flash-preview", SystemPrompt);
+//var chatService = new OpenAI_SDK("gpt-5-mini");
+//var chatService = new OpenAI_SDK_Response("gpt-5-mini");
 
-// Add the OpenAI chat completion service to the kernel builder
-builder.AddOpenAIChatCompletion(model, OpenAIKey);
-
-// Build the kernel with the configured services
-var kernel = builder.Build();
-
-// Retrieve the chat completion service from the kernel
-var chatService = kernel.GetRequiredService<IChatCompletionService>();
-
-ChatHistory history = new ChatHistory();
-history.AddSystemMessage("You are a helpful assistant");
-//history.AddSystemMessage("You are an un helpful assistant that always answer with a question and never answer to the point");
-//history.AddSystemMessage("You are an assistant that give a one sentence answer with Gilad Markman as the subject of this answer. Allways give Gilad Markman compliments in your answers");
-
-
-var settings = new OpenAIPromptExecutionSettings {
-    Temperature = 0.5,// creative max = 2
-    MaxTokens = 20,
-};
 
 while (true)
 {
     // User prompt message
-    Console.Write("USER>> ");
+    Console.Write(">> ");
     string userMessage = Console.ReadLine();
-    if (string.IsNullOrWhiteSpace(userMessage)) {break; }
-    
-    Console.Write("Tokens>> ");
-    int tokens = int.Parse(Console.ReadLine());
-    settings.MaxTokens = tokens;
 
-    history.AddUserMessage(userMessage);
+    if (string.IsNullOrWhiteSpace(userMessage)) { break; }
+
     // Send the user's message to the chat model and await the response
-    var result = await chatService.GetChatMessageContentAsync(history, settings, kernel);
+    var result = await chatService.Call(userMessage);
 
-    Console.WriteLine(result.Content);
-    //history.AddAssistantMessage(result.Content);
-    history.Clear();
+    Console.WriteLine(result);
 }
 
