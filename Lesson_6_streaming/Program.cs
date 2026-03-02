@@ -1,53 +1,28 @@
-﻿// https://platform.openai.com/settings/organization/general
+﻿using DotNetEnv;
 
-using Microsoft.SemanticKernel;
-using Microsoft.SemanticKernel.ChatCompletion;
-using Microsoft.SemanticKernel.Connectors.OpenAI;
-using System.Net;
-using System.Runtime.InteropServices;
-using System.Text;
-using DotNetEnv;
+// Automatically finds .env by searching up the directory tree
+Env.TraversePath().Load();
 
-Env.Load(@"C:\Users\Gilad\source\repos\SK\.env");
-var OpenAIKey = Environment.GetEnvironmentVariable("OpenAIKey");
+Console.Write("Add System Prompt>> ");
+string systemPrompt = Console.ReadLine();
 
-string model = "gpt-4.1-mini"; //"gpt-5-mini";
-
-// Create a Semantic Kernel builder instance
-var builder = Kernel.CreateBuilder();
-
-// Add the OpenAI chat completion service to the kernel builder
-builder.AddOpenAIChatCompletion(model, OpenAIKey);
-
-// Build the kernel with the configured services
-var kernel = builder.Build();
-
-// Retrieve the chat completion service from the kernel
-var chatService = kernel.GetRequiredService<IChatCompletionService>();
-
-ChatHistory history = new ChatHistory();
-history.AddSystemMessage("You are a helpful assistant");
-
+var chatService = new Gemini_SDK("gemini-3-flash-preview", systemPrompt);
+//var chatService = new OpenAI_SDK("gpt-5-mini", systemPrompt);
+//var chatService = new OpenAI_SDK_Response("gpt-5.2", systemPrompt);
 
 while (true)
 {
+    // User prompt message
     Console.Write(">> ");
-    string userMessage = Console.ReadLine();
-    if (string.IsNullOrWhiteSpace(userMessage)) {break;}
-    history.AddUserMessage(userMessage);
-       
-    string string_builder = "";
+    string userMessage = Console.ReadLine();    
 
-    var stream = chatService.GetStreamingChatMessageContentsAsync(
-        chatHistory: history);
+    if (string.IsNullOrWhiteSpace(userMessage)) { break; }
 
-    await foreach (var chunk in stream)
+    // Stream response chunks from the chat model
+    await foreach (var chunk in chatService.CallStream(userMessage))
     {
         Console.Write(chunk);
-        string_builder += chunk.Content;
     }
-
     Console.WriteLine();
-    history.AddAssistantMessage(string_builder);
 }
 

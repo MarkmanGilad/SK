@@ -15,7 +15,7 @@ public class OpenAI_SDK_Response
         config = new CreateResponseOptions
         {
             Model = model, // Model name to run (for example: gpt-5.2 / gpt-5-mini)
-            MaxOutputTokenCount = 512, // Upper bound for generated tokens in each response
+            //MaxOutputTokenCount = 512, // Upper bound for generated tokens in each response
             TruncationMode = ResponseTruncationMode.Auto, // Automatically trims old context if request becomes too large
             EndUserId = "user-1234", // Optional ID representing the end user, for OpenAI's monitoring and abuse detection systems
 
@@ -43,7 +43,7 @@ public class OpenAI_SDK_Response
     {
         history.Add(ResponseItem.CreateUserMessageItem(userMessage));
 
-        config. .Clear();
+        config.InputItems.Clear();
         foreach (var item in history)
         {
             config.InputItems.Add(item);
@@ -57,6 +57,29 @@ public class OpenAI_SDK_Response
         }
 
         return response.GetOutputText();
+    }
+
+    public async IAsyncEnumerable<string> CallStream(string userMessage)
+    {
+        history.Add(ResponseItem.CreateUserMessageItem(userMessage));
+
+        config.InputItems.Clear();
+        foreach (var item in history)
+        {
+            config.InputItems.Add(item);
+        }
+
+        var fullText = string.Empty;
+        await foreach (var update in GPTModel.CreateResponseStreamingAsync(config))
+        {
+            if (update is StreamingResponseOutputTextDeltaUpdate textDelta)
+            {
+                fullText += textDelta.Delta;
+                yield return textDelta.Delta;
+            }
+        }
+
+        history.Add(ResponseItem.CreateAssistantMessageItem(fullText));
     }
 }
 
