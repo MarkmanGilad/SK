@@ -4,12 +4,11 @@
 Env.TraversePath().Load();
 
 Console.Write("Add System Prompt>> ");
-string SystemPrompt = Console.ReadLine();
+string systemPrompt = Console.ReadLine();
 
-var chatService = new Gemini_SDK("gemini-3-flash-preview", SystemPrompt);
-//var chatService = new OpenAI_SDK("gpt-5-mini");
-//var chatService = new OpenAI_SDK_Response("gpt-5-mini");
-
+//var chatService = new Gemini_SDK("gemini-3-flash-preview", systemPrompt);
+//var chatService = new OpenAI_SDK("gpt-5-mini", systemPrompt);
+var chatService = new OpenAI_SDK_Response("gpt-5.2", systemPrompt);
 
 while (true)
 {

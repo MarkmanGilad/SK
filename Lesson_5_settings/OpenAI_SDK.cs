@@ -13,14 +13,8 @@ public class OpenAI_SDK
 
         config = new ChatCompletionOptions
         {
-            IncludeLogProbabilities = false, // Return token logprobs
-            StopSequences = { "END" }, // Stop tokens
-            AllowParallelToolCalls = true, // Allow parallel tool invocations
-            MaxOutputTokenCount = 256, // Max tokens in the response
-            StoredOutputEnabled = false // Store output for distillation/evals
+            //MaxOutputTokenCount = , // Max tokens in the response
         };
-
-        config.Metadata["lesson"] = "Lesson_5_settings";
 
         if (!string.IsNullOrEmpty(systemPrompt))
         {
