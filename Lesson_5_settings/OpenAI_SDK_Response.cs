@@ -30,8 +30,7 @@ public class OpenAI_SDK_Response
         if (config.ReasoningOptions == null)
         {
             config.Temperature = 0.7f; // Sampling randomness (higher = more diverse/creative output)
-            config.TopP = 0.95f; // sample from smallest token set with cumulative probability >= TopP
-            config.TopLogProbabilityCount = 5; // Return top token log-prob alternatives per generated token (advanced)
+            config.TopP = 0.95f; // sample from smallest token set with cumulative probability >= Top
         }
         // System Prompt
         if (!string.IsNullOrEmpty(systemPrompt))
