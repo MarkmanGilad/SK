@@ -1,0 +1,10 @@
+{
+  "type": "object",
+  "properties": {
+    "name": { "type": "string" },
+    "grade": { "type": "number" }
+  },
+  "required": [ "name", "grade" ],
+  "additionalProperties": false
+}
+

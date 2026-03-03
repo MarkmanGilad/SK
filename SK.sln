@@ -45,9 +45,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinForm_2", "WinForm_2\WinF
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lesson_1_2_http", "Lesson_1_2_http\Lesson_1_2_http.csproj", "{8195490E-F0BD-4452-8DA1-A8BB49975CA9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lesson_13_WinForms", "Lesson_13_WinForms\Lesson_13_WinForms.csproj", "{DB7DA466-06ED-4A2D-AC20-C3B2BEFF0CFD}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lesson_1_3_SDK", "Lesson_1_3_SDK\Lesson_1_3_SDK.csproj", "{D7824BDC-91BA-458A-9D08-C8BFFB4E85B1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinForm_3", "WinForm_3\WinForm_3.csproj", "{4836F3D0-3A24-463B-853B-80E0FCC9DFC0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lesson_7_JSON", "Lesson_7_JSON\Lesson_7_JSON.csproj", "{F764219A-8E64-45F8-85BB-CFBB8D72F1F6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -127,6 +129,14 @@ Global
 		{D7824BDC-91BA-458A-9D08-C8BFFB4E85B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D7824BDC-91BA-458A-9D08-C8BFFB4E85B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D7824BDC-91BA-458A-9D08-C8BFFB4E85B1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4836F3D0-3A24-463B-853B-80E0FCC9DFC0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4836F3D0-3A24-463B-853B-80E0FCC9DFC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4836F3D0-3A24-463B-853B-80E0FCC9DFC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4836F3D0-3A24-463B-853B-80E0FCC9DFC0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F764219A-8E64-45F8-85BB-CFBB8D72F1F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F764219A-8E64-45F8-85BB-CFBB8D72F1F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F764219A-8E64-45F8-85BB-CFBB8D72F1F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F764219A-8E64-45F8-85BB-CFBB8D72F1F6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

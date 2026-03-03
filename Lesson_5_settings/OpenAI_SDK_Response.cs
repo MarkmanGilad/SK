@@ -43,7 +43,7 @@ public class OpenAI_SDK_Response
     {
         history.Add(ResponseItem.CreateUserMessageItem(userMessage));
 
-        config. .Clear();
+        config.InputItems.Clear();
         foreach (var item in history)
         {
             config.InputItems.Add(item);

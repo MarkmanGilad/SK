@@ -67,4 +67,6 @@ public class Gemini_SDK
 
         history.Add(new Content { Role = "model", Parts = [new Part { Text = sb.ToString() }] });
     }
+
+    public void ClearHistory() => history.Clear();
 }

@@ -84,5 +84,7 @@ public class OpenAI_SDK_Response
 
         history.Add(ResponseItem.CreateAssistantMessageItem(sb.ToString()));
     }
+
+    public void ClearHistory() => history.Clear();
 }
 
