@@ -15,7 +15,11 @@ public static class Gemini_example
         Console.WriteLine(a);
 
         // B) Schema in prompt only (not strict)
-        var b = await gemini.Call(userMessage + " answer as JSON array like [{\"name\":\"...\",\"population\":123}].");
+        //var b = await gemini.Call(userMessage + " answer as JSON array like [{\"name\":\"...\",\"population\":123}].");
+        var b = await gemini.Call(
+            userMessage + 
+            " answer as JSON array like with name and population.");
+        
         Console.WriteLine("\nB) Schema in prompt only (not strict):");
         Console.WriteLine(b);
 

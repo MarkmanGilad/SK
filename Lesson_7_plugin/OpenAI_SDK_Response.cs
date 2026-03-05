@@ -16,7 +16,6 @@ public class OpenAI_SDK_Response
         this.systemPrompt = systemPrompt;
     }
 
-
     public async Task<string> Call(string userMessage, string? schema = null)
     {
         history.Add(ResponseItem.CreateUserMessageItem(userMessage));
@@ -24,7 +23,7 @@ public class OpenAI_SDK_Response
 
         var config = new CreateResponseOptions
         {
-            Model = model, // Model name to run (for example: gpt-5.2 / gpt-5-mini)
+            Model = model, 
             Instructions = systemPrompt
         };
 

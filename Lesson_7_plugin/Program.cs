@@ -1,8 +1,7 @@
 ﻿using DotNetEnv;
-using Lesson_7_plugin;
 
-Env.Load(@"C:\Users\Gilad\source\repos\SK\.env");
+Env.TraversePath().Load();
 
-var plugin = new Plugin4();
+var tool_example = new Tools1_GPT();
 
-await plugin.Run();
+await tool_example.Run();

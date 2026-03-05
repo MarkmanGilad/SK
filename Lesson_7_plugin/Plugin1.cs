@@ -3,8 +3,6 @@ using Microsoft.SemanticKernel.ChatCompletion;
 using System.Globalization;
 using System.Text.Json;
 
-
-
 namespace Lesson_7_plugin
 {
     public class Plugin1
