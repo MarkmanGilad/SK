@@ -36,8 +36,7 @@ public class Tools2_GPT
 
         Console.Write("Ask your question: ");
         var userQuestion = Console.ReadLine();
-        if (string.IsNullOrWhiteSpace(userQuestion)) return;
-
+        
         var message = userQuestion;
 
         const int maxSteps = 5;
@@ -50,7 +49,7 @@ public class Tools2_GPT
             }
 
             var stepJson = await gpt.Call(message, schema: stepSchema);
-            var step = JsonSerializer.Deserialize<Lesson_7_plugin.Plugin2.AgentStep>(stepJson, jsonOptions);
+            var step = JsonSerializer.Deserialize<AgentStep>(stepJson, jsonOptions);
             if (step is null) return;
 
             if (step.Action == "FinalAnswer")

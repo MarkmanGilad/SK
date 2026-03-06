@@ -1,0 +1,93 @@
+#pragma warning disable OPENAI001
+using OpenAI.Responses;
+
+public class Tools3_GPT
+{
+    public async Task Run()
+    {
+        var systemPrompt = """
+                You may call tools when needed.
+                Use GetDate to get today's date.
+                Use GetTime to get the current time.
+                """;
+
+        var tools = new DateTimeTools();
+
+        var noParamsSchema = BinaryData.FromString("""{ "type":"object", "properties":{}, "required":[], "additionalProperties":false }""");
+
+        var getDateTool = ResponseTool.CreateFunctionTool(
+            functionName: "GetDate",
+            functionParameters: noParamsSchema,
+            strictModeEnabled: true,
+            functionDescription: "Get today's date"
+            );
+
+        var getTimeTool = ResponseTool.CreateFunctionTool(
+            functionName: "GetTime",
+            functionParameters: noParamsSchema,
+            strictModeEnabled: true,
+            functionDescription: "Get the current time");
+
+        var openai = new OpenAI_Tools(
+            model: "gpt-5.2",
+            systemPrompt: systemPrompt,
+            tools: new List<ResponseTool> { getDateTool, getTimeTool });
+
+        Console.Write("Ask your question: ");
+        var message = Console.ReadLine();
+        if (string.IsNullOrWhiteSpace(message)) return;
+
+        const int maxSteps = 5;
+
+        var response = await openai.Call(message);
+
+        for (int step = 0; step < maxSteps; step++)
+        {
+            var toolCalls = new List<FunctionCallResponseItem>();
+            foreach (var item in response.OutputItems)
+            {
+                if (item is FunctionCallResponseItem call)
+                {
+                    toolCalls.Add(call);
+                }
+            }
+
+            if (toolCalls.Count == 0)
+            {
+                Console.WriteLine(response.GetOutputText());
+                return;
+            }
+
+            var toolOutputs = new List<ResponseItem>();
+            foreach (var call in toolCalls)
+            {
+                string toolResult;
+
+                if (call.FunctionName == "GetDate")
+                {
+                    toolResult = tools.GetDate();
+                }
+                else if (call.FunctionName == "GetTime")
+                {
+                    toolResult = tools.GetTime();
+                }
+                else
+                {
+                    toolResult = "Unknown tool: " + call.FunctionName;
+                }
+
+                toolOutputs.Add(ResponseItem.CreateFunctionCallOutputItem(call.CallId, toolResult));
+            }
+
+            if (step == maxSteps - 1)
+            {
+                toolOutputs.Add(ResponseItem.CreateUserMessageItem(
+                    "Max tool steps reached. No more tool calls are allowed. Reply normally with your best final answer using the information you already have."));
+            }
+
+            response = await openai.Call(toolOutputs);
+        }
+
+        Console.WriteLine("Max iterations reached.");
+    }
+}
