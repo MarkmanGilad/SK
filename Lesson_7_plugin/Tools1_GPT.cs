@@ -30,13 +30,9 @@ public class Tools1_GPT
             """;
 
         var tools = new DateTimeTools();
-
-        var gpt = new OpenAI_SDK_Response(model: "gpt-5.2",
-            systemPrompt: systemPrompt);
-
+        var gpt = new OpenAI_SDK_Response(model: "gpt-5.2", systemPrompt: systemPrompt);
         var jsonOptions = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
 
-        
         Console.Write("Ask your question: ");
         var userQuestion = Console.ReadLine();
 
@@ -53,13 +49,11 @@ public class Tools1_GPT
 
         if (step.Action == "GetDate")
         {
-            Console.WriteLine("GetDate");
             var toolResult = tools.GetDate();
             var message = $"Tool result: {toolResult}. Now return FinalAnswer with the result.";
             var finalJson = await gpt.Call(message, stepSchema);
 
             var finalStep = JsonSerializer.Deserialize<AgentStep>(finalJson, jsonOptions);
-            if (finalStep is null) return;
 
             Console.WriteLine(finalStep.Input);
         }
