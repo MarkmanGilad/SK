@@ -7,7 +7,7 @@ namespace Lesson_1_intro
     {
         public static async Task<string> Call()
         {
-            Env.Load(@"C:\Users\Gilad\source\repos\SK\.env");
+            Env.TraversePath().Load();
             var OpenAIKey = Environment.GetEnvironmentVariable("OpenAIKey");
             string model = "gpt-5-mini";
 

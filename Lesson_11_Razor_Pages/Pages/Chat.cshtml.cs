@@ -35,7 +35,7 @@ namespace Lesson_11_Razor_Pages.Pages
         public async Task<IActionResult> OnPostAsync()
         {
             LoadHistoryFromSession();
-            Env.Load(@"C:\Users\Gilad\source\repos\SK\.env");
+            Env.TraversePath().Load();
             var OpenAIKey = Environment.GetEnvironmentVariable("OpenAIKey");
             string model = "gpt-4.1-mini";
             var TAVILY_API_KEY = Environment.GetEnvironmentVariable("TAVILY_API_KEY");

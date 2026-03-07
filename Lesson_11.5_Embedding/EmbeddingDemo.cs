@@ -14,7 +14,7 @@ namespace Lesson_11._5_Embedding
 
         public EmbeddingDemo()
         {
-            Env.Load(@"C:\Users\Gilad\source\repos\SK\.env");
+            Env.TraversePath().Load();
             string openAiKey = Environment.GetEnvironmentVariable("OpenAIKey")!;
 
             // Create AI kernel

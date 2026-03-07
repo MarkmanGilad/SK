@@ -16,7 +16,7 @@ namespace Lesson_9_images
        
         public Img_generator()
         {
-            Env.Load(@"C:\Users\Gilad\source\repos\SK\.env");
+            Env.TraversePath().Load();
             var OpenAIKey = Environment.GetEnvironmentVariable("OpenAIKey");
             
             string imgModel = "dall-e-3"; // "gpt-image-1"; 

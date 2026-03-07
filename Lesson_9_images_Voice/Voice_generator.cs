@@ -21,7 +21,7 @@ namespace Lesson_9_images_Voice
 
         public Voice_generator()
         {
-            Env.Load(@"C:\Users\Gilad\source\repos\SK\.env");
+            Env.TraversePath().Load();
             var OpenAIKey = Environment.GetEnvironmentVariable("OpenAIKey");
             
             string audioModel = "tts-1"; // or "tts-1-hd" for higher quality

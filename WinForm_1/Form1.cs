@@ -14,7 +14,7 @@ namespace Lesson_13_WinForms
 
         private void InitializeChat()
         {
-            Env.Load(@"C:\Users\Gilad\source\repos\SK\.env");
+            Env.TraversePath().Load();
 
             _client = new OpenAI_SDK_Response("gpt-5.2");
 

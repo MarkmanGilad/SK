@@ -2,9 +2,9 @@
 
 // OpenAI Call
 //var completion = await OpenAI_Http.Call();
-var completion = await OpenAI_SDK.Call();
+//var completion = await OpenAI_SDK.Call();
 //var completion = await OpenAI_SK.Call();
-//var completion = await OpenAI_SDK_Response.Call();
+var completion = await OpenAI_SDK_Response.Call();
 
 // Gemini Call
 //var completion = await Gemini_Http.Call();

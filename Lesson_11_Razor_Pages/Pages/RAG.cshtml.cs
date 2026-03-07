@@ -48,7 +48,7 @@ namespace Lesson_11_Razor_Pages.Pages
             try
             {
                 // Load API key from .env file
-                Env.Load(@"C:\Users\Gilad\source\repos\SK\.env");
+                Env.TraversePath().Load();
                 var openAiKey = Environment.GetEnvironmentVariable("OpenAIKey");
                 
                 if (string.IsNullOrEmpty(openAiKey))
@@ -114,7 +114,7 @@ namespace Lesson_11_Razor_Pages.Pages
             try
             {
                 // Load API key from .env file
-                Env.Load(@"C:\Users\Gilad\source\repos\SK\.env");
+                Env.TraversePath().Load();
                 var openAiKey = Environment.GetEnvironmentVariable("OpenAIKey");
                 
                 if (string.IsNullOrEmpty(openAiKey))
@@ -148,7 +148,7 @@ namespace Lesson_11_Razor_Pages.Pages
             try
             {
                 // Load API key from .env file
-                Env.Load(@"C:\Users\Gilad\source\repos\SK\.env");
+                Env.TraversePath().Load();
                 var openAiKey = Environment.GetEnvironmentVariable("OpenAIKey");
                 
                 if (!string.IsNullOrEmpty(openAiKey))

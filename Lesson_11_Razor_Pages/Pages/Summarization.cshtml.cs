@@ -35,7 +35,7 @@ namespace Lesson_11_Razor_Pages.Pages
 
         public SummarizationModel()
         {
-            Env.Load(@"C:\Users\Gilad\source\repos\SK\.env");
+            Env.TraversePath().Load();
             var OpenAIKey = Environment.GetEnvironmentVariable("OpenAIKey");
             string modelId = "gpt-4.1-mini";
 

@@ -23,7 +23,7 @@ namespace Lesson_10_Summarize
 
         public RefineSummarizer(string language = "Hebrew")
         {
-            Env.Load(@"C:\Users\Gilad\source\repos\SK\.env");
+            Env.TraversePath().Load();
             OPEN_AI_KEY = Environment.GetEnvironmentVariable("OpenAIKey");
             string modelId = "gpt-4.1-mini";
 

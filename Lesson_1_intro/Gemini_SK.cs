@@ -8,7 +8,7 @@ namespace Lesson_1_intro
     {
         public static async Task<String> Call()
         {
-            Env.Load(@"C:\Users\Gilad\source\repos\SK\.env");
+            Env.TraversePath().Load();
             var GeminiAPIKey = Environment.GetEnvironmentVariable("GeminiAPIKey");
             string model = "gemini-2.5-flash";
 

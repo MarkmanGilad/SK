@@ -11,7 +11,7 @@ class Program
 
     static async Task OpenAIChat()
     {
-        Env.Load(@"C:\Users\Gilad\source\repos\SK\.env");
+        Env.TraversePath().Load();
         var apiKey = Environment.GetEnvironmentVariable("OpenAIKey");
 
         using var client = new OpenAIClient(apiKey, "gpt-4o-mini");
@@ -38,7 +38,7 @@ class Program
 
     static async Task GeminiChat()
     {
-        Env.Load(@"C:\Users\Gilad\source\repos\SK\.env");
+        Env.TraversePath().Load();
         var apiKey = Environment.GetEnvironmentVariable("GeminiAPIKey");
 
         using var client = new GeminiClient(apiKey, "gemini-2.0-flash-exp");

@@ -3,7 +3,7 @@ using Microsoft.SemanticKernel.ChatCompletion;
 using DotNetEnv;
 
 // Load API key
-Env.Load(@"C:\Users\Gilad\source\repos\SK\.env");
+Env.TraversePath().Load();
 string openAiKey = Environment.GetEnvironmentVariable("OpenAIKey")!;
 
 Console.WriteLine("RAG System");

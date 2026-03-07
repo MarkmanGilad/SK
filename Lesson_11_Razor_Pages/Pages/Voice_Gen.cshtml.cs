@@ -45,7 +45,7 @@ namespace Lesson_11_Razor_Pages.Pages
             {
                 IsGenerating = true;
 
-                Env.Load(@"C:\Users\Gilad\source\repos\SK\.env");
+                Env.TraversePath().Load();
                 var OpenAIKey = Environment.GetEnvironmentVariable("OpenAIKey");
 
                 if (string.IsNullOrEmpty(OpenAIKey))
