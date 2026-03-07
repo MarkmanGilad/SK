@@ -1,11 +1,12 @@
-﻿using Lesson_8_webPlugin;
+﻿using DotNetEnv;
 
+Env.TraversePath().Load();
 
-//var webChat = new WebChat();
-//await webChat.chat();
+//var searchTool = new TavilySearch();
+//var results = await searchTool.Search("Who is Gilad Markman from Israel?");
+//Console.WriteLine(results);
 
-//var webChat = new WebChat_no_streaming();
-//await webChat.chat();
+//var tools = new Tools3_GPT();
+var tools = new Tools3_Gemini();
 
-var webChat = new WebChat_Gemini();
-await webChat.chat();
+await tools.Run();
