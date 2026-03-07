@@ -7,10 +7,11 @@ public class OpenAI_SDK_Response
     private readonly List<ResponseItem> history = new();
     private readonly CreateResponseOptions config;
 
+
     public OpenAI_SDK_Response(string model, string? systemPrompt = null)
     {
         var OpenAIKey = Environment.GetEnvironmentVariable("OpenAIKey");
-        GPTModel = new ResponsesClient(model, OpenAIKey);
+        GPTModel = new ResponsesClient(OpenAIKey);
 
         config = new CreateResponseOptions
         {

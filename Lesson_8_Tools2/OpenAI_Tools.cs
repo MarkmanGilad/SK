@@ -13,7 +13,7 @@ public class OpenAI_Tools
     public OpenAI_Tools(string model, string? systemPrompt = null, List<ResponseTool>? tools = null, string? schema = null)
     {
         var OpenAIKey = Environment.GetEnvironmentVariable("OpenAIKey");
-        GPTModel = new ResponsesClient(model, OpenAIKey);
+        GPTModel = new ResponsesClient(OpenAIKey);
         this.model = model;
         this.systemPrompt = systemPrompt;
         this.tools = tools;

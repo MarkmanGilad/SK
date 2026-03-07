@@ -17,10 +17,10 @@ namespace Lesson_1_intro
             var userMessage = Console.ReadLine();
 
             // Create OpenAI client
-            var client = new ResponsesClient(model, OpenAIKey);
+            var client = new ResponsesClient(OpenAIKey);
 
             // Send the chat completion request
-            var response = await client.CreateResponseAsync(userMessage);
+            var response = await client.CreateResponseAsync(model, userMessage);
 
             // Get the response content
             return response.Value.GetOutputText();

@@ -11,7 +11,7 @@ public class OpenAI_SDK_Response
     public OpenAI_SDK_Response(string model, string? systemPrompt = null)
     {
         var OpenAIKey = Environment.GetEnvironmentVariable("OpenAIKey");
-        GPTModel = new ResponsesClient(model, OpenAIKey);
+        GPTModel = new ResponsesClient(OpenAIKey);
         this.model = model;
         this.systemPrompt = systemPrompt;
     }

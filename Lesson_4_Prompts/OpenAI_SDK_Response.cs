@@ -5,11 +5,13 @@ public class OpenAI_SDK_Response
 {
     private readonly ResponsesClient GPTModel; 
     private readonly List<ResponseItem> history = new();
+    private readonly string model;
 
     public OpenAI_SDK_Response(string model, string? systemPrompt = null)
     {
         var OpenAIKey = Environment.GetEnvironmentVariable("OpenAIKey");
-        GPTModel = new ResponsesClient(model, OpenAIKey);
+        GPTModel = new ResponsesClient(OpenAIKey);
+        this.model = model;
 
         if (!string.IsNullOrEmpty(systemPrompt))
         {
@@ -21,7 +23,7 @@ public class OpenAI_SDK_Response
     {
         history.Add(ResponseItem.CreateUserMessageItem(userMessage));
         
-        ResponseResult response = await GPTModel.CreateResponseAsync(history);
+        ResponseResult response = await GPTModel.CreateResponseAsync(model, history);
 
         history.Add(ResponseItem.CreateAssistantMessageItem(response.GetOutputText()));
 
