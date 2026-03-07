@@ -43,40 +43,37 @@ public class Tools3_GPT
 
         for (int step = 0; step < maxSteps; step++)
         {
-            var toolCalls = new List<FunctionCallResponseItem>();
+            int count = 0;
+            var toolOutputs = new List<ResponseItem>();
             foreach (var item in response.OutputItems)
             {
-                if (item is FunctionCallResponseItem call)
+                if (item is FunctionCallResponseItem)
                 {
-                    toolCalls.Add(call);
+                    count ++;
+                    var call = (FunctionCallResponseItem)item;
+                    string toolResult;
+
+                    if (call.FunctionName == "GetDate")
+                    {
+                        toolResult = tools.GetDate();
+                    }
+                    else if (call.FunctionName == "GetTime")
+                    {
+                        toolResult = tools.GetTime();
+                    }
+                    else
+                    {
+                        toolResult = "Unknown tool: " + call.FunctionName;
+                    }
+
+                    toolOutputs.Add(ResponseItem.CreateFunctionCallOutputItem(call.CallId, toolResult));
                 }
             }
 
-            if (toolCalls.Count == 0)
+            if (count == 0)
             {
                 Console.WriteLine(response.GetOutputText());
                 return;
-            }
-
-            var toolOutputs = new List<ResponseItem>();
-            foreach (var call in toolCalls)
-            {
-                string toolResult;
-
-                if (call.FunctionName == "GetDate")
-                {
-                    toolResult = tools.GetDate();
-                }
-                else if (call.FunctionName == "GetTime")
-                {
-                    toolResult = tools.GetTime();
-                }
-                else
-                {
-                    toolResult = "Unknown tool: " + call.FunctionName;
-                }
-
-                toolOutputs.Add(ResponseItem.CreateFunctionCallOutputItem(call.CallId, toolResult));
             }
 
             if (step == maxSteps - 1)

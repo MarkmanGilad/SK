@@ -7,6 +7,6 @@ Env.TraversePath().Load();
 //var tool_example = new Tools2_GPT(); // multiple tool calls with agent loop
 //var tool_example = new Tools2_Gemini(); // multiple tool calls with agent loop
 //var tool_example = new Tools3_GPT();
-var tool_example = new Tools4_GPT();
+var tool_example = new Tools3_Gemini();
 
 await tool_example.Run();

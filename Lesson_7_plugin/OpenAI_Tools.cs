@@ -20,11 +20,6 @@ public class OpenAI_Tools
         this.schema = schema;
     }
 
-    public void ClearHistory()
-    {
-        history.Clear();
-    }
-
     public Task<ResponseResult> Call(string userMessage)
     {
         var newItems = new List<ResponseItem> { ResponseItem.CreateUserMessageItem(userMessage) };
@@ -85,5 +80,8 @@ public class OpenAI_Tools
         return config;
     }
 
-    
+    public void ClearHistory()
+    {
+        history.Clear();
+    }
 }
