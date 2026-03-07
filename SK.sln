@@ -1,4 +1,4 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 18
 VisualStudioVersion = 18.0.11217.181
@@ -11,9 +11,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lesson_5_settings", "Lesson
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lesson_6_streaming", "Lesson_6_streaming\Lesson_6_streaming.csproj", "{F1D44ED8-2B5A-4957-B2B0-1095F35EF4ED}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lesson_8_Tools", "Lesson_7_plugin\Lesson_8_Tools.csproj", "{6B72ED9E-CF89-4A15-B524-51272C9166B2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lesson_8_Tools", "Lesson_8_Tools\Lesson_8_Tools.csproj", "{6B72ED9E-CF89-4A15-B524-51272C9166B2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lesson_8_Tools2", "Lesson_8_webPlugin\Lesson_8_Tools2.csproj", "{4FBF1EDE-79A0-4CA3-BF7C-74362A7D27F8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lesson_8_Tools2", "Lesson_8_Tools2\Lesson_8_Tools2.csproj", "{4FBF1EDE-79A0-4CA3-BF7C-74362A7D27F8}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8EC462FD-D22E-90A8-E5CE-7E832BA40C5D}"
 	ProjectSection(SolutionItems) = preProject
@@ -24,7 +24,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lesson_9_images_Voice", "Lesson_9_images\Lesson_9_images_Voice.csproj", "{DC788D21-DA28-4A74-BA19-D8A437D54CAA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lesson_9_images_Voice", "Lesson_9_images_Voice\Lesson_9_images_Voice.csproj", "{DC788D21-DA28-4A74-BA19-D8A437D54CAA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lesson_10_Summarize", "Lesson_10_Summarize\Lesson_10_Summarize.csproj", "{EED732C7-2F22-482D-8CB7-5AA8A85EFACC}"
 EndProject
@@ -36,9 +36,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lesson_2_StateLess", "Lesso
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lesson_12_RAG", "Lesson_12_RAG\Lesson_12_RAG.csproj", "{9F4C802F-F926-1289-78FB-365DD105506E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lesson_11.5_Embedding", "Lesson_11.5_Embeddings\Lesson_11.5_Embedding.csproj", "{16D9B90A-4C04-4C87-9E64-DB6374695CF6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lesson_11.5_Embedding", "Lesson_11.5_Embedding\Lesson_11.5_Embedding.csproj", "{16D9B90A-4C04-4C87-9E64-DB6374695CF6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinForm_1", "Lesson_13_WinForms\WinForm_1.csproj", "{944F768D-5272-4230-99B5-C57BE1A69DE9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinForm_1", "WinForm_1\WinForm_1.csproj", "{944F768D-5272-4230-99B5-C57BE1A69DE9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lesson_14_Http", "Lesson_14_Http\Lesson_14_Http.csproj", "{A19B235F-FA16-40FA-9665-E0D7B81A37A2}"
 EndProject
@@ -134,3 +134,4 @@ Global
 		SolutionGuid = {19CB319E-D618-40B5-91C0-2A261DF450E5}
 	EndGlobalSection
 EndGlobal
+
