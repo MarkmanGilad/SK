@@ -113,6 +113,10 @@ public class Tools3_GPT
             {
                 toolOutputs.Add(ResponseItem.CreateUserMessageItem(
                     "Max tool steps reached. No more tool calls are allowed. Reply normally with your best final answer using the information you already have."));
+
+                response = await openai.Call(toolOutputs);
+                Console.WriteLine(response.GetOutputText());
+                return;
             }
 
             response = await openai.Call(toolOutputs);

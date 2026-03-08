@@ -2,7 +2,7 @@
 using OpenAI.Responses;
 using System.Text.Json;
 
-public class Tools_GPT
+public class Tools_GPT_Thinking
 {
     public async Task Run()
     {
@@ -168,13 +168,18 @@ public class Tools_GPT
                             toolResult = "Tool error: " + ex.Message;
                         }
 
+                        Console.WriteLine($"Tool: {call.FunctionName}");
+                        Console.WriteLine($"Arguments: {call.FunctionArguments}");
+                        Console.WriteLine($"Answer: {toolResult}");
+                        Console.WriteLine();
+
                         toolOutputs.Add(ResponseItem.CreateFunctionCallOutputItem(call.CallId, toolResult));
                     }
                 }
 
                 if (count == 0)
                 {
-                    Console.WriteLine(response.GetOutputText());
+                    Console.WriteLine("****** \n" + response.GetOutputText());
                     finalResponsePrinted = true;
                     break;
                 }
@@ -185,7 +190,7 @@ public class Tools_GPT
                         "Max tool steps reached. No more tool calls are allowed. Reply normally with your best final answer using the information you already have."));
 
                     response = await openai.Call(toolOutputs);
-                    Console.WriteLine(response.GetOutputText());
+                    Console.WriteLine("******\n" + response.GetOutputText());
                     finalResponsePrinted = true;
                     break;
                 }

@@ -1,6 +1,7 @@
 using Google.GenAI.Types;
+using System.Text.Json;
 
-public class Tools_Gemini
+public class Tools_Gemini_Thinking
 {
     public async Task Run()
     {
@@ -157,6 +158,11 @@ public class Tools_Gemini
                             toolResult = "Tool error: " + ex.Message;
                         }
 
+                        Console.WriteLine($"Tool: {call.Name}");
+                        Console.WriteLine($"Arguments: {JsonSerializer.Serialize(call.Args)}");
+                        Console.WriteLine($"Answer: {toolResult}");
+                        Console.WriteLine();
+
                         toolOutputMessage.Parts.Add(new Part
                         {
                             FunctionResponse = new FunctionResponse
@@ -171,7 +177,7 @@ public class Tools_Gemini
                 if (count == 0)
                 {
                     var textPart = response.Candidates[0].Content.Parts.FirstOrDefault(p => !string.IsNullOrWhiteSpace(p.Text));
-                    Console.WriteLine(textPart?.Text ?? string.Empty);
+                    Console.WriteLine("******\n" + (textPart?.Text ?? string.Empty));
                     finalResponsePrinted = true;
                     break;
                 }
@@ -186,7 +192,7 @@ public class Tools_Gemini
                     response = await gemini.Call(new List<Content> { toolOutputMessage });
 
                     var textPart = response.Candidates[0].Content.Parts.FirstOrDefault(p => !string.IsNullOrWhiteSpace(p.Text));
-                    Console.WriteLine(textPart?.Text ?? string.Empty);
+                    Console.WriteLine("******\n" + (textPart?.Text ?? string.Empty));
                     finalResponsePrinted = true;
                     break;
                 }

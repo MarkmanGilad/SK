@@ -114,7 +114,16 @@ public class Tools3_Gemini
 
             if (step == maxSteps - 1)
             {
-                toolOutputMessage.Parts.Add(new Part { Text = "\"Max tool steps reached. No more tool calls are allowed. Reply normally with your best final answer using the information you already have.\"" });
+                toolOutputMessage.Parts.Add(new Part
+                {
+                    Text = "Max tool steps reached. No more tool calls are allowed. Reply normally with your best final answer using the information you already have."
+                });
+
+                response = await gemini.Call(new List<Content> { toolOutputMessage });
+
+                var finalText = response.Candidates[0].Content.Parts[0].Text;
+                Console.WriteLine(finalText);
+                return;
             }
 
             response = await gemini.Call(new List<Content> { toolOutputMessage });
