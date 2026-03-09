@@ -4,7 +4,7 @@ using OpenAI.Images;
 using DotNetEnv;
 
 public class OpenAI_Img
-{
+{   
     private readonly ImageClient _imageClient;
     private readonly string _imgFolder;
 
@@ -16,6 +16,7 @@ public class OpenAI_Img
 
         // Resolve the Img folder relative to the project root
         _imgFolder = Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "Img");
+        Directory.CreateDirectory(_imgFolder);
     }
 
     public async Task<byte[]> GenerateImageAsync(string prompt, string fileName = "generated.png")
@@ -36,4 +37,6 @@ public class OpenAI_Img
         Console.WriteLine($"Generated: {Path.GetFullPath(savePath)}");
         return imageBytes;
     }
+
+    
 }
