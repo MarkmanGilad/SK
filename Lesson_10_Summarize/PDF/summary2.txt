@@ -1,2 +1,0 @@
-﻿Take the last letter of each word in ‘deep learning is fun today’ and concatenate them. Break the task into steps: (1) list words, (2) write each last letter, (3) concatenate. Do steps 1→3.
-

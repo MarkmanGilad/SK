@@ -9,9 +9,9 @@ public class GPT_Create_Image
         Env.TraversePath().Load();
 
         var systemPrompt = """
-                You may use the image generation tool to edit images.
-                When the user asks to edit an image, use the provided image and the prompt to create the edited version.
-                After editing an image, always return a short text explaining what you changed.
+                You may use the image generation tool to create images from the user's description.
+                When the user asks to create an image, generate it based on the prompt.
+                After creating an image, always return a short text describing what you created.
                 """;
 
         var imageGenerationTool = ResponseTool.CreateImageGenerationTool(model: "gpt-image-1");

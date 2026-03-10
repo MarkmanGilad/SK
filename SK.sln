@@ -25,21 +25,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lesson_9_images_Voice", "Lesson_9_images_Voice\Lesson_9_images_Voice.csproj", "{DC788D21-DA28-4A74-BA19-D8A437D54CAA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lesson_10_Summarize", "Lesson_10_Summarize\Lesson_10_Summarize.csproj", "{EED732C7-2F22-482D-8CB7-5AA8A85EFACC}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lesson_11_Razor_Pages", "Lesson_11_Razor_Pages\Lesson_11_Razor_Pages.csproj", "{D049300D-2CAE-41C5-B024-B7E1E1CBE3FA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lesson_12_Razor_Pages", "Lesson_12_Razor_Pages\Lesson_12_Razor_Pages.csproj", "{D049300D-2CAE-41C5-B024-B7E1E1CBE3FA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lesson_1_intro", "Lesson_1_intro\Lesson_1_intro.csproj", "{B5302B07-C228-050F-CE77-94176206B541}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lesson_2_StateLess", "Lesson_2_StateLess\Lesson_2_StateLess.csproj", "{195BBC75-9014-D3EA-C230-5252A52A9D99}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lesson_12_RAG", "Lesson_12_RAG\Lesson_12_RAG.csproj", "{9F4C802F-F926-1289-78FB-365DD105506E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lesson_11_RAG", "Lesson_11_RAG\Lesson_11_RAG.csproj", "{9F4C802F-F926-1289-78FB-365DD105506E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lesson_11.5_Embedding", "Lesson_11.5_Embedding\Lesson_11.5_Embedding.csproj", "{16D9B90A-4C04-4C87-9E64-DB6374695CF6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lesson_10_Embedding", "Lesson_10_Embedding\Lesson_10_Embedding.csproj", "{16D9B90A-4C04-4C87-9E64-DB6374695CF6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinForm_1", "WinForm_1\WinForm_1.csproj", "{944F768D-5272-4230-99B5-C57BE1A69DE9}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lesson_14_Http", "Lesson_14_Http\Lesson_14_Http.csproj", "{A19B235F-FA16-40FA-9665-E0D7B81A37A2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinForm_2", "WinForm_2\WinForm_2.csproj", "{74033A08-D7AA-49D0-A015-D58463AC5964}"
 EndProject
@@ -93,10 +89,6 @@ Global
 		{DC788D21-DA28-4A74-BA19-D8A437D54CAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DC788D21-DA28-4A74-BA19-D8A437D54CAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DC788D21-DA28-4A74-BA19-D8A437D54CAA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EED732C7-2F22-482D-8CB7-5AA8A85EFACC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EED732C7-2F22-482D-8CB7-5AA8A85EFACC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EED732C7-2F22-482D-8CB7-5AA8A85EFACC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EED732C7-2F22-482D-8CB7-5AA8A85EFACC}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D049300D-2CAE-41C5-B024-B7E1E1CBE3FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D049300D-2CAE-41C5-B024-B7E1E1CBE3FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D049300D-2CAE-41C5-B024-B7E1E1CBE3FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -121,10 +113,6 @@ Global
 		{944F768D-5272-4230-99B5-C57BE1A69DE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{944F768D-5272-4230-99B5-C57BE1A69DE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{944F768D-5272-4230-99B5-C57BE1A69DE9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A19B235F-FA16-40FA-9665-E0D7B81A37A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A19B235F-FA16-40FA-9665-E0D7B81A37A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A19B235F-FA16-40FA-9665-E0D7B81A37A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A19B235F-FA16-40FA-9665-E0D7B81A37A2}.Release|Any CPU.Build.0 = Release|Any CPU
 		{74033A08-D7AA-49D0-A015-D58463AC5964}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{74033A08-D7AA-49D0-A015-D58463AC5964}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{74033A08-D7AA-49D0-A015-D58463AC5964}.Release|Any CPU.ActiveCfg = Release|Any CPU

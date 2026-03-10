@@ -6,7 +6,7 @@ public class GPT_Edit_Image
 {
     public async Task Run()
     {
-        var fileName = "robot_dog.png";
+        var fileName = "robot_tennis_2.png";
         var filePath = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "Img", fileName));
 
         Env.TraversePath().Load();
@@ -43,6 +43,5 @@ public class GPT_Edit_Image
         //await openai.DeleteUploadedImage(fileId);
 
         Console.WriteLine($"\n{response.GetOutputText()}\n");
-        //Console.WriteLine("If an image was edited, it was saved to the Img folder.");
     }
 }
