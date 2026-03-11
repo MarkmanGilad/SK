@@ -55,6 +55,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lesson_8_Tools4", "Lesson_8
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lesson_9_images_Voice_2", "Lesson_9_images_Voice_2\Lesson_9_images_Voice_2.csproj", "{832C886C-3C24-4AC9-8598-AD711C9FCD4C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lesson_11_RAG_srv", "Lesson_11_RAG_srv\Lesson_11_RAG_srv.csproj", "{C9B727F1-AF47-4057-A582-5BB6E7E0CB4F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -137,6 +139,10 @@ Global
 		{832C886C-3C24-4AC9-8598-AD711C9FCD4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{832C886C-3C24-4AC9-8598-AD711C9FCD4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{832C886C-3C24-4AC9-8598-AD711C9FCD4C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C9B727F1-AF47-4057-A582-5BB6E7E0CB4F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C9B727F1-AF47-4057-A582-5BB6E7E0CB4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C9B727F1-AF47-4057-A582-5BB6E7E0CB4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C9B727F1-AF47-4057-A582-5BB6E7E0CB4F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
