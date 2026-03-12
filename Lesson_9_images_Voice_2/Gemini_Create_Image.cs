@@ -18,13 +18,12 @@ public class Gemini_Create_Image
 
         var gemini = new Gemini_Images(
             model: "gemini-3.1-flash-image-preview",
-            systemPrompt: systemPrompt,
-            responseModalities: [Modality.Text.ToString(), Modality.Image.ToString()]);
+            systemPrompt: systemPrompt);
 
         Console.Write("Create image prompt: ");
         var createPrompt = Console.ReadLine();
 
-        var response = await gemini.Call(createPrompt ?? string.Empty);
+        var response = await gemini.Call(createPrompt);
 
         Console.WriteLine($"\n{Gemini_Images.GetOutputText(response)}\n");
         //Console.WriteLine("If an image was created, it was saved to the Img folder.");

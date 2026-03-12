@@ -13,10 +13,7 @@ public class OpenAI_Img
         Env.TraversePath().Load();
         var apiKey = Environment.GetEnvironmentVariable("OpenAIKey");
         _imageClient = new ImageClient(model, apiKey);
-
-        // Resolve the Img folder relative to the project root
         _imgFolder = Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "Img");
-        Directory.CreateDirectory(_imgFolder);
     }
 
     public async Task<byte[]> GenerateImageAsync(string prompt, string fileName = "generated.png")

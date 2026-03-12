@@ -6,6 +6,7 @@ public class Google_Voice
 {
     private readonly Client _client;
     private readonly string _audioFolder;
+    private string Model;
 
     public Google_Voice(string model = "gemini-2.5-flash-preview-tts")
     {
@@ -13,14 +14,9 @@ public class Google_Voice
 
         var apiKey = System.Environment.GetEnvironmentVariable("GeminiAPIKey");
         _client = new Client(apiKey: apiKey);
-
         _audioFolder = Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "Audio");
-        Directory.CreateDirectory(_audioFolder);
-
         Model = model;
     }
-
-    private string Model { get; }
 
     public async Task<byte[]> GenerateVoiceAsync(
         string prompt, string fileName = "generated.wav", string voiceName = "Kore")

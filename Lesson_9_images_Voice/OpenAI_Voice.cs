@@ -13,9 +13,7 @@ public class OpenAI_Voice
         Env.TraversePath().Load();
         var apiKey = Environment.GetEnvironmentVariable("OpenAIKey");
         _audioClient = new AudioClient(model, apiKey);
-
         _audioFolder = Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "Audio");
-        Directory.CreateDirectory(_audioFolder);
     }
 
     public async Task<byte[]> GenerateVoiceAsync(string prompt, string fileName = "generated.mp3")

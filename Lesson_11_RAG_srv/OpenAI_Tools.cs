@@ -121,4 +121,11 @@ public class OpenAI_Tools
     {
         await FileModel.DeleteFileAsync(fileId);
     }
+
+    public async Task<string> AddFileToVectorStore(string vectorStoreId, string filePath)
+    {
+        var fileId = await UploadFile(filePath);
+        await VectorStoreModel.AddFileToVectorStoreAsync(vectorStoreId, fileId);
+        return fileId;
+    }
 }

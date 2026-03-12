@@ -78,7 +78,8 @@ public class Tools_Gemini
         var executeNonQuery = new FunctionDeclaration
         {
             Name = "ExecuteNonQuery",
-            Description = "Run INSERT, UPDATE, or DELETE on the SQL database and return the number of affected rows",
+            Description = "Run INSERT, UPDATE, or DELETE on the SQL database " +
+            "and return the number of affected rows",
             Parameters = sqlSchema
         };
 

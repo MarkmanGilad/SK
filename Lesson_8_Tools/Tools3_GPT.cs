@@ -13,7 +13,9 @@ public class Tools3_GPT
 
         var tools = new DateTimeTools();
 
-        var noParamsSchema = BinaryData.FromString("""{ "type":"object", "properties":{}, "required":[], "additionalProperties":false }""");
+        var noParamsSchema = BinaryData.FromString("""
+            { "type":"object", "properties":{}, "required":[], "additionalProperties":false }
+            """);
 
         var getDateTool = ResponseTool.CreateFunctionTool(
             functionName: "GetDate",
@@ -38,9 +40,7 @@ public class Tools3_GPT
         if (string.IsNullOrWhiteSpace(message)) return;
 
         const int maxSteps = 5;
-
         var response = await openai.Call(message);
-
         for (int step = 0; step < maxSteps; step++)
         {
             int count = 0;
@@ -79,7 +79,8 @@ public class Tools3_GPT
             if (step == maxSteps - 1)
             {
                 toolOutputs.Add(ResponseItem.CreateUserMessageItem(
-                    "Max tool steps reached. No more tool calls are allowed. Reply normally with your best final answer using the information you already have."));
+                    "Max tool steps reached. No more tool calls are allowed. " +
+                    "Reply normally with your best final answer using the information you already have."));
             }
 
             response = await openai.Call(toolOutputs);

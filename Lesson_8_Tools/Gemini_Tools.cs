@@ -1,6 +1,5 @@
 using Google.GenAI;
 using Google.GenAI.Types;
-using System.Text.Json;
 
 public class Gemini_Tools
 {
@@ -38,13 +37,9 @@ public class Gemini_Tools
         var config = CreateConfig();
 
         var response = await GeminiModel.Models.GenerateContentAsync(model: Model, contents: history, config: config);
-
-        // Save assistant text (tool flow will be handled by caller)
-        if (response.Candidates.Count > 0 && response.Candidates[0].Content is not null)
-        {
-            history.Add(response.Candidates[0].Content);
-        }
-
+                
+        history.Add(response.Candidates[0].Content);
+        
         return response;
     }
 

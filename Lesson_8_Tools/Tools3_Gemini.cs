@@ -41,13 +41,10 @@ public class Tools3_Gemini
         if (string.IsNullOrWhiteSpace(message)) return;
 
         const int maxSteps = 5;
-
         var response = await gemini.Call(message);
-
         for (int step = 0; step < maxSteps; step++)
         {
             var parts = response.Candidates[0].Content.Parts;
-
             int count = 0;
             var toolOutputMessage = new Content { Role = "user", Parts = new List<Part>() };
             foreach (var part in parts)
@@ -91,7 +88,9 @@ public class Tools3_Gemini
 
             if (step == maxSteps - 1)
             {
-                toolOutputMessage.Parts.Add(new Part { Text = "\"Max tool steps reached. No more tool calls are allowed. Reply normally with your best final answer using the information you already have.\"" });
+                toolOutputMessage.Parts.Add(new Part 
+                    { Text = "\"Max tool steps reached. No more tool calls are allowed. " +
+                    "Reply normally with your best final answer using the information you already have.\"" });
             }
 
             response = await gemini.Call(new List<Content> { toolOutputMessage });

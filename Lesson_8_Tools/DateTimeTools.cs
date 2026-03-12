@@ -9,7 +9,8 @@ public class DateTimeTools
 {
     public string GetDate()
     {
-        return DateTime.Now.ToString("dddd, MMMM dd, yyyy", CultureInfo.GetCultureInfo("en-US"));
+        return DateTime.Now.ToString("dddd, MMMM dd, yyyy", 
+            CultureInfo.GetCultureInfo("en-US"));
     }
 
     public string GetTime()

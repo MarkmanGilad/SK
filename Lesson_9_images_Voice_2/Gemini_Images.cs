@@ -17,25 +17,16 @@ public class Gemini_Images
         string model,
         string? systemPrompt = null,
         List<Tool>? tools = null,
-        List<string>? responseModalities = null,
         string imageFolderName = "Img")
     {
         var geminiKey = System.Environment.GetEnvironmentVariable("GeminiAPIKey");
-
-        if (string.IsNullOrWhiteSpace(geminiKey))
-        {
-            throw new InvalidOperationException("GeminiAPIKey environment variable was not found.");
-        }
-
         GeminiModel = new Client(apiKey: geminiKey);
         FileModel = GeminiModel.Files;
         this.model = model;
         this.systemPrompt = systemPrompt;
         this.tools = tools;
-        this.responseModalities = responseModalities ?? [Modality.Text.ToString(), Modality.Image.ToString()];
-
+        this.responseModalities = [Modality.Text.ToString(), Modality.Image.ToString()];
         imageFolderPath = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..", "..", "..", imageFolderName));
-        Directory.CreateDirectory(imageFolderPath);
     }
 
     public Task<GenerateContentResponse> Call(string userMessage)
@@ -58,35 +49,17 @@ public class Gemini_Images
         }
 
         var config = CreateConfig();
-
         var response = await GeminiModel.Models.GenerateContentAsync(model: model, contents: history, config: config);
-
-        if (response.Candidates.Count > 0 && response.Candidates[0].Content is not null)
-        {
-            history.Add(response.Candidates[0].Content);
-        }
-
+        history.Add(response.Candidates[0].Content);
         SaveGeneratedImages(response);
-
         return response;
     }
 
     private GenerateContentConfig CreateConfig()
     {
         var config = new GenerateContentConfig();
-
-        if (responseModalities is not null)
-        {
-            config.ResponseModalities = responseModalities;
-        }
-
-        if (!string.IsNullOrWhiteSpace(systemPrompt))
-        {
-            config.SystemInstruction = new Content
-            {
-                Parts = [new Part { Text = systemPrompt }]
-            };
-        }
+        config.ResponseModalities = responseModalities;
+        config.SystemInstruction = new Content{Parts = [new Part { Text = systemPrompt }]};
 
         if (tools is not null)
         {
@@ -139,16 +112,16 @@ public class Gemini_Images
         {
             foreach (var part in candidate.Content?.Parts ?? [])
             {
-                if (part.InlineData?.Data is null ||
-                    string.IsNullOrWhiteSpace(part.InlineData.MimeType) ||
-                    !part.InlineData.MimeType.StartsWith("image/"))
+                var inlineData = part.InlineData;
+
+                if (inlineData?.Data is null || inlineData.MimeType is null || !inlineData.MimeType.StartsWith("image/"))
                 {
                     continue;
                 }
 
-                var extension = GetFileExtension(part.InlineData.MimeType);
+                var extension = GetFileExtension(inlineData.MimeType);
                 var filePath = Path.Combine(imageFolderPath, $"{Guid.NewGuid()}{extension}");
-                System.IO.File.WriteAllBytes(filePath, part.InlineData.Data);
+                System.IO.File.WriteAllBytes(filePath, inlineData.Data);
             }
         }
     }

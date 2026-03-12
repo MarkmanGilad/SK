@@ -5,7 +5,8 @@ public class Gemini_Edit_Image
 {
     public async Task Run()
     {
-        var fileName = "robot_dog.png";
+        Console.Write("Image file name (soccer.png): ");
+        var fileName = Console.ReadLine();
         var filePath = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "Img", fileName));
 
         Env.TraversePath().Load();
@@ -19,16 +20,12 @@ public class Gemini_Edit_Image
 
         var gemini = new Gemini_Images(
             model: "gemini-3.1-flash-image-preview",
-            systemPrompt: systemPrompt,
-            responseModalities: ["TEXT", "IMAGE"]);
+            systemPrompt: systemPrompt);
 
         Console.WriteLine($"Image to edit: {filePath}\n");
-
         Console.Write("Edit prompt: ");
         var editPrompt = Console.ReadLine();
-
         var uploadedFile = await gemini.UploadImage(filePath);
-
         var response = await gemini.Call(
         [
             new Content
@@ -36,14 +33,11 @@ public class Gemini_Edit_Image
                 Role = "user",
                 Parts =
                 [
-                    Part.FromUri(
-                        uploadedFile.Uri ?? throw new InvalidOperationException("Uploaded Gemini file URI was not returned."),
-                        uploadedFile.MimeType ?? "application/octet-stream"),
-                    new Part { Text = editPrompt ?? string.Empty }
+                    Part.FromUri(uploadedFile.Uri, uploadedFile.MimeType),
+                    new Part { Text = editPrompt }
                 ]
             }
         ]);
-
         Console.WriteLine($"\n{Gemini_Images.GetOutputText(response)}\n");
     }
 }

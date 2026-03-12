@@ -84,7 +84,8 @@ public class Tools_GPT
             functionName: "ExecuteNonQuery",
             functionParameters: sqlSchema,
             strictModeEnabled: true,
-            functionDescription: "Run INSERT, UPDATE, or DELETE on the SQL database and return the number of affected rows");
+            functionDescription: "Run INSERT, UPDATE, or DELETE on the SQL database " +
+            "and return the number of affected rows");
 
         var openai = new OpenAI_Tools(
             model: "gpt-5.2",

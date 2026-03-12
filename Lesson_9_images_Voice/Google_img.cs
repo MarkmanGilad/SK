@@ -6,20 +6,17 @@ public class GoogleImg
 {
     private readonly Client _imageClient;
     private readonly string _imgFolder;
+    private string Model;
 
     public GoogleImg(string model = "imagen-4.0-generate-001")
     {
         Env.TraversePath().Load();
         var apiKey = System.Environment.GetEnvironmentVariable("GeminiAPIKey");
         _imageClient = new Client(apiKey: apiKey);
-
-        // Resolve the Img folder relative to the project root
         _imgFolder = Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "Img");
         Model = model;
     }
-
-    private string Model { get; }
-
+    
     public async Task<byte[]> GenerateImageAsync(string prompt, string fileName = "generated.png")
     {
         var options = new GenerateImagesConfig

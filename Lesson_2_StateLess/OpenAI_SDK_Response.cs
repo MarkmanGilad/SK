@@ -1,5 +1,5 @@
 ﻿#pragma warning disable OPENAI001
-using DotNetEnv;
+
 using OpenAI.Responses;
 
 public class OpenAI_SDK_Response

@@ -43,14 +43,17 @@ public class Tools2_Gemini
         if (string.IsNullOrWhiteSpace(userQuestion)) return;
 
         var message = userQuestion;
-
         const int maxSteps = 5;
 
         for (int i = 0; i < maxSteps; i++)
         {
             if (i == maxSteps - 1)
             {
-                message = "Max tool steps reached. No more tool calls are allowed. Return Action=\"FinalAnswer\" and fill Input with your best final answer using the information you already have. If the answer is incomplete, say what is missing.";
+                message = """
+                    Max tool steps reached. No more tool calls are allowed. 
+                    Return Action="FinalAnswer" and fill Input with your best final answer using the information you already have. 
+                    If the answer is incomplete, say what is missing.";
+                    """;
             }
 
             var stepJson = await gemini.Call(message, stepSchema);
@@ -77,7 +80,6 @@ public class Tools2_Gemini
                 continue;
             }
         }
-
         Console.WriteLine("Max iterations reached without FinalAnswer.");
     }
 }
