@@ -7,6 +7,7 @@ public class Gemini_SDK
 
     public Gemini_SDK(string model)
     {
+        // Client() reads the Gemini API key from the GOOGLE_API_KEY environment variable.
         GeminiModel = new Client();
         Model = model;
     }

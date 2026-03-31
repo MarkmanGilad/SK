@@ -1,7 +1,7 @@
 ﻿#pragma warning disable OPENAI001
 using OpenAI.Responses;
 
-public class OpenAI_SDK_Response_srv
+public class OpenAI_SDK_Response_srv    
 {
     private readonly ResponsesClient GPTModel;
     private string ? previousResponseId = null;
@@ -19,7 +19,7 @@ public class OpenAI_SDK_Response_srv
             userMessage, previousResponseId);
 
         previousResponseId = response.Id;
-
+        
         return response.GetOutputText();
     }
 }

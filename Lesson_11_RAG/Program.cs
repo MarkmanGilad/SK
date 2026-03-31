@@ -11,17 +11,17 @@ Console.WriteLine();
 
 if (loadPdf == 'Y' || loadPdf == 'y')
 {
-    Console.Write("Do you want to delete existing collection first? (Y/N): ");
-    var deleteCollection = Console.ReadKey().KeyChar;
+    Console.Write("Do you want to delete existing namespace first? (Y/N): ");
+    var deleteNameSpace = Console.ReadKey().KeyChar;
     Console.WriteLine();
 
     var pdfLoader = new PdfLoader();
     var pineconeClient = new PineconeClient();
 
-    if (deleteCollection == 'Y' || deleteCollection == 'y')
+    if (deleteNameSpace == 'Y' || deleteNameSpace == 'y')
     {
-        await pineconeClient.DeleteCollection();
-        Console.WriteLine("Collection cleared");
+        await pineconeClient.ClearNameSpace();
+        Console.WriteLine("NameSpace cleared");
     }
 
     Console.Write("Enter PDF file name: ");

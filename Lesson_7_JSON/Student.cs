@@ -9,5 +9,10 @@ public class Student
     public string Name { get; set; }
     public int Grade { get; set; }
     public string Subject { get; set; }
+
+    public override string ToString()
+    {
+        return $"Name: {Name} Grade {Grade} Subject {Subject}";
+    }
 }
 

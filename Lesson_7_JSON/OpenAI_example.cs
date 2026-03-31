@@ -1,4 +1,7 @@
+using Google.GenAI;
 using System.Text.Json;
+using System.Xml.Linq;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 public static class OpenAI_example
 {
@@ -14,7 +17,8 @@ public static class OpenAI_example
         Console.WriteLine(oa);
 
         // B) Schema in prompt only (not strict)
-        var ob = await openai.Call(userMessage + " answer as JSON array like [{\"name\":\"...\",\"population\":123}].");
+        var ob = await openai.Call(userMessage + "answer as JSON array like with name and population.");
+            //" answer as JSON array like [{\"name\":\"...\",\"population\":123}].");
         Console.WriteLine("\nOB) OpenAI Schema in prompt only (not strict):");
         Console.WriteLine(ob);
 

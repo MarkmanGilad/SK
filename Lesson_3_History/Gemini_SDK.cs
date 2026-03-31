@@ -18,7 +18,7 @@ public class Gemini_SDK
         history.Add(new Content { Role = "user", Parts = [new Part { Text = userMessage }] });
 
         var response = await this.GeminiModel.Models.GenerateContentAsync(
-            model: "gemini-2.5-flash", contents: history);
+            model: this.Model, contents: history);
 
         var text = response.Candidates[0].Content.Parts[0].Text;
 

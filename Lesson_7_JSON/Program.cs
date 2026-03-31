@@ -7,7 +7,8 @@ public class Program
         Env.TraversePath().Load();
 
         //await JSON_example.Run();
-        await Gemini_example.Run();
-        //await OpenAI_example.Run();
+        await OpenAI_example.Run();
+        //await Gemini_example.Run();
+        
     }
 }

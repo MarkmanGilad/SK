@@ -8,7 +8,7 @@ public class PineconeClient
     private readonly OpenAI_Embeddings _embeddings = new();
     private readonly string _pinecodeApiKey;
 
-    private readonly string _collectionName = "rag";
+    private readonly string _nameSpace = "rag";
     private readonly string _indexHost = "rag-h30zh6f.svc.aped-4627-b74a.pinecone.io";
 
     public PineconeClient()
@@ -40,7 +40,7 @@ public class PineconeClient
             "vectors/upsert", 
             new Dictionary<string, object?>
             {
-                ["namespace"] = _collectionName,
+                ["namespace"] = _nameSpace,
                 ["vectors"] = vectors
             });
     }
@@ -53,7 +53,7 @@ public class PineconeClient
             "query", 
             new Dictionary<string, object?>
             {
-                ["namespace"] = _collectionName,
+                ["namespace"] = _nameSpace,
                 ["vector"] = embedding,
                 ["topK"] = maxResults,
                 ["includeMetadata"] = true,
@@ -75,11 +75,11 @@ public class PineconeClient
         return results;
     }
 
-    public async Task DeleteCollection()
+    public async Task ClearNameSpace()
     {
         using var response = await PostAsync("vectors/delete", new Dictionary<string, object?>
         {
-            ["namespace"] = _collectionName,
+            ["namespace"] = _nameSpace,
             ["deleteAll"] = true
         });
     }
@@ -93,3 +93,4 @@ public class PineconeClient
         return _httpClient.SendAsync(request);
     }
 }
+

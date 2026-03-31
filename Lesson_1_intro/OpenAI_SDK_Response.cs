@@ -10,7 +10,7 @@ namespace Lesson_1_intro
         {
             Env.TraversePath().Load();
             var OpenAIKey = Environment.GetEnvironmentVariable("OpenAIKey");
-            string model = "gpt-5-mini";
+            string model = "gpt-5.4";
 
             // User prompt message
             Console.Write("You (OpenAI_SDK) >> ");

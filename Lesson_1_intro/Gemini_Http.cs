@@ -37,11 +37,11 @@ namespace Lesson_1_intro
                     }
                 }
             };
-
-            // Send the HTTP request
+                        
             var content = new StringContent(JsonSerializer.Serialize(payload), 
                 Encoding.UTF8, "application/json");
-
+            
+            // Send the HTTP request
             // First await: sends the request and waits until the response headers (status code) arrive
             // The response body may not be downloaded yet at this point
             var response = await httpClient.PostAsync(url, content);

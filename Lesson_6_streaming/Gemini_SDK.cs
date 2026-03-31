@@ -38,13 +38,13 @@ public class Gemini_SDK
 
     public async Task<string> Call(string userMessage)
     {
-        history.Add(new Content {Role = "user",Parts = [new Part { Text = userMessage }]});
+        history.Add(new Content { Role = "user", Parts = [new Part { Text = userMessage }] });
 
         var response = await GeminiModel.Models.GenerateContentAsync(
             model: Model, contents: history, config: config
         );
         var text = response.Candidates[0].Content.Parts[0].Text;
-        history.Add(new Content {Role = "model", Parts = [new Part { Text = text }]});
+        history.Add(new Content { Role = "model", Parts = [new Part { Text = text }] });
         return text;
     }
 
@@ -54,8 +54,12 @@ public class Gemini_SDK
 
         var sb = new StringBuilder();
 
-        await foreach (var chunk in GeminiModel.Models.GenerateContentStreamAsync(
-            model: Model, contents: history, config: config))
+        var stream = GeminiModel.Models.GenerateContentStreamAsync(
+            model: Model,
+            contents: history,
+            config: config);
+
+        await foreach (var chunk in stream)
         {
             var text = chunk.Candidates?[0].Content?.Parts?[0].Text;
             if (!string.IsNullOrEmpty(text))
@@ -64,6 +68,17 @@ public class Gemini_SDK
                 yield return text;
             }
         }
+
+        //await foreach (var chunk in GeminiModel.Models.GenerateContentStreamAsync(
+        //    model: Model, contents: history, config: config))
+        //{
+        //    var text = chunk.Candidates?[0].Content?.Parts?[0].Text;
+        //    if (!string.IsNullOrEmpty(text))
+        //    {
+        //        sb.Append(text);
+        //        yield return text;
+        //    }
+        //}
 
         history.Add(new Content { Role = "model", Parts = [new Part { Text = sb.ToString() }] });
     }

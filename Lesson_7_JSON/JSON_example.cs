@@ -23,20 +23,24 @@ public static class JSON_example
         var students = new List<Student> { student1, student2 };
         string jsonList = JsonSerializer.Serialize(students);
         Console.WriteLine(jsonList);
+
+        string studentJsonPath = System.IO.Path.GetFullPath(
+            System.IO.Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "student.json"));
                 
         // Single object
-        string json1 = System.IO.File.ReadAllText("C:\\Users\\ASUS\\source\\repos\\SK\\Lesson_7_JSON\\student.json");
+        string json1 = System.IO.File.ReadAllText(studentJsonPath);
         Student student = JsonSerializer.Deserialize<Student>(json);
         Console.WriteLine(student);
 
         // List of objects
-        string jsonList1 = System.IO.File.ReadAllText("C:\\Users\\ASUS\\source\\repos\\SK\\Lesson_7_JSON\\student.json");
+        string jsonList1 = System.IO.File.ReadAllText(studentJsonPath);
         
         var jsonOptions = new JsonSerializerOptions {PropertyNameCaseInsensitive = true };
         List<Student> students1 = JsonSerializer.Deserialize<List<Student>>(
             jsonList, jsonOptions);
         
         Console.WriteLine(students1);
+        Console.WriteLine(students1[0]);
 
     }
 }
