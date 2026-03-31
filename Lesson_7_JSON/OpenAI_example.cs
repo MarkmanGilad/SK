@@ -11,12 +11,13 @@ public static class OpenAI_example
         var openai = new OpenAI_SDK_Response("gpt-5.2");
         var userMessage = "List the 10 countries with the highest population and the population number.";
 
-        // A) No schema - plain text output
+        #region A) No schema - plain text output
         var oa = await openai.Call(userMessage);
         Console.WriteLine("\nOA) OpenAI No schema (text):");
         Console.WriteLine(oa);
-
-        // B) Schema in prompt only (not strict)
+        #endregion
+        return;
+        #region B) Schema in prompt only (not strict)
         var ob = await openai.Call(userMessage + "answer as JSON array like with name and population.");
             //" answer as JSON array like [{\"name\":\"...\",\"population\":123}].");
         Console.WriteLine("\nOB) OpenAI Schema in prompt only (not strict):");
@@ -42,8 +43,10 @@ public static class OpenAI_example
             Console.WriteLine($"Prompt structure error (OB): invalid JSON format. {ex.Message}");
             Console.ResetColor();
         }
+        #endregion
+        return;
 
-        // C) Strict schema (string)
+        #region C) Strict schema (string)
         var strictSchemaOpenAI = """
             {
                 "type": "object",
@@ -91,4 +94,5 @@ public static class OpenAI_example
             Console.ResetColor();
         }
     }
+        #endregion
 }

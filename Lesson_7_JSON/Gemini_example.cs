@@ -8,13 +8,14 @@ public static class Gemini_example
         var jsonOptions = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
         var gemini = new Gemini_SDK("gemini-2.5-flash");
         var userMessage = "List the 10 countries with the highest population and the population number.";
-        
-        // A) No schema - plain text output
+
+        #region A) No schema - plain text output
         var a = await gemini.Call(userMessage);
         Console.WriteLine("\nA) No schema (text):");
         Console.WriteLine(a);
-
-        // B) Schema in prompt only (not strict)
+        #endregion
+        return;
+        #region B) Schema in prompt only (not strict)
         //var b = await gemini.Call(userMessage + " answer as JSON array like [{\"name\":\"...\",\"population\":123}].");
         var b = await gemini.Call(
             userMessage + 
@@ -43,8 +44,9 @@ public static class Gemini_example
             Console.WriteLine($"Prompt structure error (B): invalid JSON format. {ex.Message}");
             Console.ResetColor();
         }
-
-        // C) Strict schema (object)
+        #endregion
+        return;
+        #region C) Strict schema (object)
         var strictSchema = new Schema
         {
             Type = Google.GenAI.Types.Type.Object,
@@ -92,5 +94,6 @@ public static class Gemini_example
             Console.WriteLine($"Prompt structure error (C): invalid JSON format. {ex.Message}");
             Console.ResetColor();
         }
+        #endregion
     }
 }
