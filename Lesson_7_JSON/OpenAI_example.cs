@@ -9,14 +9,14 @@ public static class OpenAI_example
     {
         var jsonOptions = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
         var openai = new OpenAI_SDK_Response("gpt-5.2");
-        var userMessage = "List the 10 countries with the highest population and the population number.";
+        var userMessage = "List the 20 countries with the highest population and the population number.";
 
         #region A) No schema - plain text output
         var oa = await openai.Call(userMessage);
         Console.WriteLine("\nOA) OpenAI No schema (text):");
         Console.WriteLine(oa);
         #endregion
-        return;
+        
         #region B) Schema in prompt only (not strict)
         var ob = await openai.Call(userMessage + "answer as JSON array like with name and population.");
             //" answer as JSON array like [{\"name\":\"...\",\"population\":123}].");
@@ -44,7 +44,7 @@ public static class OpenAI_example
             Console.ResetColor();
         }
         #endregion
-        return;
+        
 
         #region C) Strict schema (string)
         var strictSchemaOpenAI = """

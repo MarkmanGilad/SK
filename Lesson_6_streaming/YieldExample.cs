@@ -17,6 +17,7 @@ namespace Lesson_6_streaming
             Console.WriteLine("from method after 2");
             yield return 3;
             Console.WriteLine("from method after 3");
+            yield return 4;
         }
 
         public void RunGetNumbers()
@@ -25,12 +26,14 @@ namespace Lesson_6_streaming
             {
                 Console.WriteLine($"from main: {num}");
             }
+
         }
+
 
         public async IAsyncEnumerable<int> GetNumbersAsync()
         {
             yield return 1;
-            await Task.Delay(1000);
+            await Task.Delay(5000);
 
             yield return 2;
             await Task.Delay(1000);
@@ -50,12 +53,13 @@ namespace Lesson_6_streaming
         {
             var example = new YieldExample();
 
-            Console.WriteLine("Synchronous yield:");
-            example.RunGetNumbers();
+            //Console.WriteLine("Synchronous yield:");
+            //example.RunGetNumbers();
 
             //Console.WriteLine();
-            //Console.WriteLine("Asynchronous yield:");
-            //await example.RunGetNumbersAsync();
+            Console.WriteLine("Asynchronous yield:");
+            await example.RunGetNumbersAsync();
+            Console.WriteLine("End");
         }
     }
 

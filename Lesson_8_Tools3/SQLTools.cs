@@ -2,7 +2,6 @@
 using System.Text.Json;
 using Microsoft.Data.SqlClient;
 
-
 public class SQLTools
 {
     private readonly string conString;
@@ -16,7 +15,7 @@ public class SQLTools
 
         conString = new SqlConnectionStringBuilder
         {
-            DataSource = @"(LocalDB)\MSSQLLocalDB",
+            DataSource = @"(LocalDB)\MSSQLLocalDB17",
             AttachDBFilename = databasePath,
             IntegratedSecurity = true,
             ConnectTimeout = 30
@@ -28,7 +27,7 @@ public class SQLTools
     // Returns DataTable with the Table.
     {
         // connect to DataBase
-        SqlConnection con = new SqlConnection(conString);
+        using SqlConnection con = new SqlConnection(conString);
 
         // Build SQL Query
         SqlCommand cmd = new SqlCommand(SQLStr, con);
@@ -71,7 +70,7 @@ public class SQLTools
     public int ExecuteNonQuery(string SQL)
     {
         // התחברות למסד הנתונים
-        SqlConnection con = new SqlConnection(conString);
+        using SqlConnection con = new SqlConnection(conString);
 
         // בניית פקודת SQL
         SqlCommand cmd = new SqlCommand(SQL, con);
@@ -79,7 +78,6 @@ public class SQLTools
         // ביצוע השאילתא
         con.Open();
         int n = cmd.ExecuteNonQuery();
-        con.Close();
 
         // return the number of rows affected
         return n;

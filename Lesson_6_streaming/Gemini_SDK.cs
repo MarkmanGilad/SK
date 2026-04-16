@@ -53,7 +53,7 @@ public class Gemini_SDK
         history.Add(new Content { Role = "user", Parts = [new Part { Text = userMessage }] });
 
         var sb = new StringBuilder();
-
+        
         var stream = GeminiModel.Models.GenerateContentStreamAsync(
             model: Model,
             contents: history,

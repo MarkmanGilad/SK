@@ -7,9 +7,9 @@ public class Tools1_Gemini
         var systemPrompt = """
             Always reply with JSON only:
             {
-              "Thought": "why you chose the action",
-              "Action": "GetDate" or "FinalAnswer",
-              "Input": "" // empty for GetDate, or the final answer text for FinalAnswer
+              "thought": "why you chose the action",
+              "action": "GetDate" or "FinalAnswer",
+              "input": "" // empty for GetDate, or the final answer text for FinalAnswer
             }
 
             If you need today's date to answer, set Action="GetDate" and leave Input empty.

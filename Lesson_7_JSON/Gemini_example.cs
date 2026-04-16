@@ -7,14 +7,14 @@ public static class Gemini_example
     {
         var jsonOptions = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
         var gemini = new Gemini_SDK("gemini-2.5-flash");
-        var userMessage = "List the 10 countries with the highest population and the population number.";
+        var userMessage = "List the 20 countries with the highest population and the population number.";
 
         #region A) No schema - plain text output
         var a = await gemini.Call(userMessage);
         Console.WriteLine("\nA) No schema (text):");
         Console.WriteLine(a);
         #endregion
-        return;
+        
         #region B) Schema in prompt only (not strict)
         //var b = await gemini.Call(userMessage + " answer as JSON array like [{\"name\":\"...\",\"population\":123}].");
         var b = await gemini.Call(

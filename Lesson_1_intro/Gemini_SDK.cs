@@ -9,6 +9,7 @@ public class Gemini_SDK
     {
         Env.TraversePath().Load();
         var geminiKey = Environment.GetEnvironmentVariable("GeminiAPIKey");
+        
         string model = "gemini-2.5-flash";
 
         // User prompt message
