@@ -195,6 +195,8 @@ Generating **text embeddings** with `OpenAI_Embeddings.cs`, computing cosine sim
 ### 🌐 Lesson 12 – Razor Pages UI (`Lesson_12_Razor_Pages`)
 Wraps the previous concepts in an **ASP.NET Core Razor Pages** web app with session state (`AddSession`, `UseSession`) so the chat history survives across requests.
 
+> **Note:** this Razor Pages project is still based on the **Semantic Kernel** code from the `main` branch — it hasn't been ported to the OpenAI / Gemini SDK style used by the rest of this branch yet.
+
 <a id="winforms"></a>
 ### 🖥️ WinForm Projects
 Desktop front-ends that reuse the same SDK wrappers from the lessons:
