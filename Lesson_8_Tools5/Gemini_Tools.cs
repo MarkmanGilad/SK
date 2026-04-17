@@ -10,6 +10,11 @@ public class Gemini_Tools
     private readonly string? systemPrompt;
     private readonly List<Tool>? tools;
 
+    public List<Content> GetHistory()
+    {
+        return history;
+    }
+
     public Gemini_Tools(string model, string? systemPrompt = null, List<Tool>? tools = null)
     {
         GeminiModel = new Client();
