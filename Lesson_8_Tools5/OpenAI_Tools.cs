@@ -84,4 +84,9 @@ public class OpenAI_Tools
     {
         history.Clear();
     }
+
+    public List<ResponseItem> GetHistory()
+    {
+        return history;
+    }
 }
