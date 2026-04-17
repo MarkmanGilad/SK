@@ -38,12 +38,19 @@ public class Tools_Gemini_Thinking
 
             const int maxSteps = 5;
 
-            var startIndex = gemini.GetHistory().Count;
+            if (thinking)
+            {
+                Console.WriteLine();
+                Console.WriteLine("====================== Thinking ======================");
+                Console.WriteLine();
+            }
+
             var response = await gemini.Call(message);
 
             for (int step = 0; step < maxSteps; step++)
             {
-                var parts = response.Candidates[0].Content.Parts;
+                var content = response.Candidates[0].Content;
+                var parts = content.Parts;
 
                 int count = 0;
                 var toolOutputMessage = new Content { Role = "user", Parts = new List<Part>() };
@@ -104,7 +111,19 @@ public class Tools_Gemini_Thinking
                             }
                         });
                     }
+                    else if (part.ExecutableCode is not null || part.CodeExecutionResult is not null)
+                    {
+                        count++;
+                    }
                 }
+
+                if (thinking)
+                {
+                    PrintContent(content);
+                    PrintContent(toolOutputMessage);
+                }
+
+                SaveFiles(content);
 
                 if (count == 0)
                 {
@@ -119,50 +138,32 @@ public class Tools_Gemini_Thinking
                     });
 
                     response = await gemini.Call(new List<Content> { toolOutputMessage });
+                    SaveFiles(response.Candidates[0].Content);
                     break;
                 }
 
-                response = await gemini.Call(new List<Content> { toolOutputMessage });
+                response = toolOutputMessage.Parts.Count > 0
+                    ? await gemini.Call(new List<Content> { toolOutputMessage })
+                    : await gemini.Call(new List<Content>());
             }
 
-            PrintSession(gemini.GetHistory(), startIndex, thinking);
+            Console.WriteLine();
+            Console.WriteLine("====================== Final Answer ======================");
+            Console.WriteLine();
+
+            PrintContent(response.Candidates[0].Content);
+            Console.WriteLine("========================== END ===========================");
+            Console.WriteLine();
         }
     }
 
-    private static void PrintSession(List<Content> history, int startIndex, bool thinking)
-    {
-        if (startIndex >= history.Count) return;
-
-        int lastIndex = history.Count - 1;
-
-        if (thinking)
-        {
-            Console.WriteLine();
-            Console.WriteLine("====================== Thinking ======================");
-            Console.WriteLine();
-
-            for (int i = startIndex; i <= lastIndex; i++)
-            {
-                bool isLast = i == lastIndex;
-                PrintThinkingContent(history[i], includeText: !isLast);
-            }
-        }
-
-        Console.WriteLine();
-        Console.WriteLine("====================== Final Answer ======================");
-        Console.WriteLine();
-
-        PrintFinalContent(history[lastIndex]);
-        Console.WriteLine("========================== END ===========================");
-    }
-
-    private static void PrintThinkingContent(Content content, bool includeText)
+    private static void PrintContent(Content content)
     {
         if (content.Parts is null) return;
 
         foreach (var part in content.Parts)
         {
-            if (includeText && !string.IsNullOrWhiteSpace(part.Text))
+            if (!string.IsNullOrWhiteSpace(part.Text))
             {
                 Console.WriteLine(part.Text);
             }
@@ -193,20 +194,25 @@ public class Tools_Gemini_Thinking
                 Console.WriteLine(part.CodeExecutionResult.Output);
                 Console.WriteLine();
             }
+            else if (part.InlineData is not null
+                && part.InlineData.MimeType is string mime
+                && mime.StartsWith("image/", StringComparison.OrdinalIgnoreCase)
+                && part.InlineData.Data is byte[] bytes
+                && bytes.Length > 0)
+            {
+                Console.WriteLine($"--- Code execution image ({mime}) ---");
+                Console.WriteLine();
+            }
         }
     }
 
-    private static void PrintFinalContent(Content content)
+    private static void SaveFiles(Content content)
     {
         if (content.Parts is null) return;
 
         foreach (var part in content.Parts)
         {
-            if (!string.IsNullOrWhiteSpace(part.Text))
-            {
-                Console.WriteLine(part.Text);
-            }
-            else if (part.InlineData is not null
+            if (part.InlineData is not null
                 && part.InlineData.MimeType is string mime
                 && mime.StartsWith("image/", StringComparison.OrdinalIgnoreCase)
                 && part.InlineData.Data is byte[] bytes
