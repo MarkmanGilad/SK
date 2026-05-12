@@ -52,18 +52,18 @@ public class RagChat
 
             foreach (var item in response.OutputItems)
             {
-                if (item is FunctionCallResponseItem)
+                if (item is FunctionCallResponseItem call)
                 {
                     count++;
-                    var call = (FunctionCallResponseItem)item;
+                    //var call = (FunctionCallResponseItem)item;
                     string toolResult;
 
                     if (call.FunctionName == "PineconeSearch")
                     {
                         var argsStr = call.FunctionArguments.ToString();
                         var args = JsonSerializer.Deserialize<Dictionary<string, JsonElement>>(argsStr);
-
-                        string searchQuestion = args["question"].GetString()!;
+                        string searchQuestion = args["question"].GetString();
+                        
                         var docs = await _pineconeClient.Search(searchQuestion, 4);
                         toolResult = string.Join("\n\n", docs);
                     }
