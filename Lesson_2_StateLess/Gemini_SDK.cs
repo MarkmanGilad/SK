@@ -16,8 +16,8 @@ public class Gemini_SDK
     {
             
         // Send the request
-        var response = await this.GeminiModel.Models.GenerateContentAsync(
-            model: "gemini-2.5-flash", contents: userMessage
+        var response = await GeminiModel.Models.GenerateContentAsync(
+            model: Model, contents: userMessage
         );
 
         // Get the response content

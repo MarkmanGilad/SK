@@ -7,10 +7,7 @@ public class GPT_Edit_Image
     public async Task Run()
     {
         Env.TraversePath().Load();
-
-        Console.WriteLine("Enter file to edit fro folder Img/:(robot_tennis_2.png): ");
-        var fileName = Console.ReadLine();
-        var filePath = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "Img", fileName));
+        
         var systemPrompt = """
             You may use the image generation tool to edit images.
             When the user asks to edit an image, use the provided image and the prompt to create the edited version.
@@ -23,8 +20,12 @@ public class GPT_Edit_Image
             model: "gpt-5.2",
             systemPrompt: systemPrompt,
             tools: new List<ResponseTool> { imageGenerationTool });
-
+        
+        Console.WriteLine("Enter file to edit from folder Img/:(robot_tennis_2.png): ");
+        var fileName = Console.ReadLine();
+        var filePath = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "Img", fileName));
         Console.WriteLine($"Image to edit: {filePath} \n");
+        
         Console.Write("Edit prompt: ");
         var editPrompt = Console.ReadLine();
         var fileId = await openai.UploadImage(filePath);

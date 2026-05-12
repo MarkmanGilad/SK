@@ -54,10 +54,7 @@ public class Gemini_SDK
 
         var sb = new StringBuilder();
         
-        var stream = GeminiModel.Models.GenerateContentStreamAsync(
-            model: Model,
-            contents: history,
-            config: config);
+        var stream = GeminiModel.Models.GenerateContentStreamAsync(model: Model, contents: history, config: config);
 
         await foreach (var chunk in stream)
         {

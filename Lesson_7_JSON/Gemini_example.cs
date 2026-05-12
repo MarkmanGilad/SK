@@ -44,8 +44,10 @@ public static class Gemini_example
             Console.WriteLine($"Prompt structure error (B): invalid JSON format. {ex.Message}");
             Console.ResetColor();
         }
+        
+        
         #endregion
-        return;
+
         #region C) Strict schema (object)
         var strictSchema = new Schema
         {

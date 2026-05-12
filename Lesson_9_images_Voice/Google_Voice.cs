@@ -38,12 +38,36 @@ public class Google_Voice
         var response = await _client.Models.GenerateContentAsync(
             model: Model, contents: prompt, config: config);
 
-        byte[] audioBytes = response.Candidates[0].Content.Parts[0].InlineData.Data.ToArray();
+        byte[] pcmBytes = response.Candidates[0].Content.Parts[0].InlineData.Data.ToArray();
+        byte[] audioBytes = ConvertPcmToWav(pcmBytes);
 
         string savePath = Path.Combine(_audioFolder, fileName);
+        Directory.CreateDirectory(_audioFolder);
         await System.IO.File.WriteAllBytesAsync(savePath, audioBytes);
 
         Console.WriteLine($"Generated: {Path.GetFullPath(savePath)}");
         return audioBytes;
+    }
+
+    private static byte[] ConvertPcmToWav(byte[] pcmBytes)
+    {
+        using var stream = new MemoryStream();
+        using var writer = new BinaryWriter(stream);
+
+        writer.Write("RIFF"u8);
+        writer.Write(36 + pcmBytes.Length);
+        writer.Write("WAVEfmt "u8);
+        writer.Write(16);
+        writer.Write((short)1);
+        writer.Write((short)1);
+        writer.Write(24000);
+        writer.Write(48000);
+        writer.Write((short)2);
+        writer.Write((short)16);
+        writer.Write("data"u8);
+        writer.Write(pcmBytes.Length);
+        writer.Write(pcmBytes);
+
+        return stream.ToArray();
     }
 }

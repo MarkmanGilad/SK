@@ -33,10 +33,10 @@ namespace Lesson_6_streaming
         public async IAsyncEnumerable<int> GetNumbersAsync()
         {
             yield return 1;
-            await Task.Delay(5000);
+            await Task.Delay(3000);
 
             yield return 2;
-            await Task.Delay(1000);
+            await Task.Delay(3000);
 
             yield return 3;
         }
@@ -56,7 +56,7 @@ namespace Lesson_6_streaming
             //Console.WriteLine("Synchronous yield:");
             //example.RunGetNumbers();
 
-            //Console.WriteLine();
+            Console.WriteLine();
             Console.WriteLine("Asynchronous yield:");
             await example.RunGetNumbersAsync();
             Console.WriteLine("End");
