@@ -5,10 +5,7 @@ public class Gemini_Edit_Image
 {
     public async Task Run()
     {
-        Console.Write("Image file name (soccer.png): ");
-        var fileName = Console.ReadLine();
-        var filePath = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "Img", fileName));
-
+        
         Env.TraversePath().Load();
 
         var systemPrompt = """
@@ -21,6 +18,10 @@ public class Gemini_Edit_Image
         var gemini = new Gemini_Images(
             model: "gemini-3.1-flash-image-preview",
             systemPrompt: systemPrompt);
+
+        Console.Write("Image file name (soccer.png): ");
+        var fileName = Console.ReadLine();
+        var filePath = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "Img", fileName));
 
         Console.WriteLine($"Image to edit: {filePath}\n");
         Console.Write("Edit prompt: ");

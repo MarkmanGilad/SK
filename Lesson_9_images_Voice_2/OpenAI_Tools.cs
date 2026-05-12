@@ -103,7 +103,7 @@ public class OpenAI_Tools
     {
         foreach (var item in response.OutputItems)
         {
-            if (item is ImageGenerationCallResponseItem image)
+            if (item is ImageGenerationCallResponseItem image) // with casting
             {
                 var bytes = image.ImageResultBytes.ToArray();
                 var filePath = Path.Combine(imageFolderPath, $"{image.Id}.png");

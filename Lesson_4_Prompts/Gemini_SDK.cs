@@ -23,7 +23,7 @@ public class Gemini_SDK
 
         if (!string.IsNullOrEmpty(SystemPrompt))
         {
-            config.SystemInstruction = new Content {Parts = [new Part { Text = SystemPrompt }, new Part { Text = "Answer with a song"}] };
+            config.SystemInstruction = new Content {Parts = [new Part { Text = SystemPrompt }] };
         }
 
         var response = await GeminiModel.Models.GenerateContentAsync(

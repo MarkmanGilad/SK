@@ -1,3 +1,4 @@
+
 #pragma warning disable OPENAI001
 using OpenAI.Responses;
 using System.Text.Json;

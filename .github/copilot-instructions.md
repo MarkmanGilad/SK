@@ -9,6 +9,7 @@
 - User explicitly prefers changing the saved images collection to a public list instead of a private list plus IReadOnlyList wrapper in this file.
 - User wants Gemini_Tools to match the current OpenAI_Tools style instead of returning a tuple.
 - User prefers simple loops instead of LINQ in this project when possible.
+- User prefers tutorial code to be simple and easy to read, avoiding verbose implementations when possible.
 - When asked to revert a requested change, apply the exact revert and verify the file state rather than only describing it.
 
 ## Image Workflow Guidelines

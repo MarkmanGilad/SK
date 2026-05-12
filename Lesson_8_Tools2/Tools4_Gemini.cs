@@ -13,6 +13,7 @@ public class Tools4_Gemini
 
         var tools = new DateTimeTools();
         var tavily = new TavilySearch();
+
         var noParamsSchema = new Schema { Type = Google.GenAI.Types.Type.Object };
         var tavilySchema = new Schema
         {
@@ -23,6 +24,7 @@ public class Tools4_Gemini
             },
             Required = new List<string> { "query" }
         };
+        
         var getDate = new FunctionDeclaration
         {
             Name = "GetDate",
