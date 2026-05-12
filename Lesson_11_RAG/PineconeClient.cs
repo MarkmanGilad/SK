@@ -36,32 +36,31 @@ public class PineconeClient
             });
         }
 
-        using var response = await PostAsync(
-            "vectors/upsert", 
-            new Dictionary<string, object?>
-            {
-                ["namespace"] = _nameSpace,
-                ["vectors"] = vectors
-            });
+        var body = new Dictionary<string, object?>
+        {
+            ["namespace"] = _nameSpace,
+            ["vectors"] = vectors
+        };
+
+        using var response = await PostAsync("vectors/upsert", body); 
     }
 
     public async Task<List<string>> Search(string question, int maxResults = 4)
     {
         float[] embedding = await _embeddings.EmbedAsync(question);
 
-        using var response = await PostAsync(
-            "query", 
-            new Dictionary<string, object?>
-            {
-                ["namespace"] = _nameSpace,
-                ["vector"] = embedding,
-                ["topK"] = maxResults,
-                ["includeMetadata"] = true,
-                ["includeValues"] = false
-            });
+        var body = new Dictionary<string, object?>
+        {
+            ["namespace"] = _nameSpace,
+            ["vector"] = embedding,
+            ["topK"] = maxResults,
+            ["includeMetadata"] = true,
+            ["includeValues"] = false
+        };
+        using var response = await PostAsync("query", body);
 
-        string body = await response.Content.ReadAsStringAsync();
-        using JsonDocument json = JsonDocument.Parse(body);
+        string response_str = await response.Content.ReadAsStringAsync();
+        using JsonDocument json = JsonDocument.Parse(response_str);
 
         var results = new List<string>();
         JsonElement matches = json.RootElement.GetProperty("matches");
@@ -77,11 +76,12 @@ public class PineconeClient
 
     public async Task ClearNameSpace()
     {
-        using var response = await PostAsync("vectors/delete", new Dictionary<string, object?>
+        var body = new Dictionary<string, object?>
         {
             ["namespace"] = _nameSpace,
             ["deleteAll"] = true
-        });
+        };
+        using var response = await PostAsync("vectors/delete", body);
     }
 
     private Task<HttpResponseMessage> PostAsync(string path, object body)

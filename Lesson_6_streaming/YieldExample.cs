@@ -29,7 +29,6 @@ namespace Lesson_6_streaming
 
         }
 
-
         public async IAsyncEnumerable<int> GetNumbersAsync()
         {
             yield return 1;
@@ -53,13 +52,13 @@ namespace Lesson_6_streaming
         {
             var example = new YieldExample();
 
-            //Console.WriteLine("Synchronous yield:");
-            //example.RunGetNumbers();
+            Console.WriteLine("Synchronous yield:");
+            example.RunGetNumbers();
 
             //Console.WriteLine();
-            Console.WriteLine("Asynchronous yield:");
-            await example.RunGetNumbersAsync();
-            Console.WriteLine("End");
+            //Console.WriteLine("Asynchronous yield:");
+            //await example.RunGetNumbersAsync();
+            //Console.WriteLine("End");
         }
     }
 
