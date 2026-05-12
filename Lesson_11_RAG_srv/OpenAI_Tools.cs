@@ -101,11 +101,12 @@ public class OpenAI_Tools
         return uploadedFile.Value.Id;
     }
 
-    public async Task<string> CreateVectorStore(string fileId)
+    public async Task<string> CreateVectorStore(string fileId, string title = "RAG Vector Store")
     {
         var vectorStore = await VectorStoreModel.CreateVectorStoreAsync(
             new VectorStoreCreationOptions
             {
+                Name = title,
                 FileIds = { fileId }
             });
 
@@ -120,6 +121,11 @@ public class OpenAI_Tools
     public async Task DeleteUploadedFile(string fileId)
     {
         await FileModel.DeleteFileAsync(fileId);
+    }
+
+    public async Task DeleteFileFromVectorStore(string vectorStoreId, string fileId)
+    {
+        await VectorStoreModel.RemoveFileFromVectorStoreAsync(vectorStoreId, fileId);
     }
 
     public async Task<string> AddFileToVectorStore(string vectorStoreId, string filePath)
